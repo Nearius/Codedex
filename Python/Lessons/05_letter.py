@@ -1,0 +1,6 @@
+print('Saturday, 07/22/2023')
+print(' ')
+print('I feel excited and happy to make the decision that will change my life 😁')
+print('I wish I could learn at least the basics of the Python language and thus start my journey in code')
+print('Remember, nothing is impossible in this life, step by step, you can go very far')
+print('🦁')

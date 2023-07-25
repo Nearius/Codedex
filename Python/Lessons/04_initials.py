@@ -1,0 +1,5 @@
+print(' AAA   V       V')
+print('A   A   V     V')
+print('AAAAA    V   V')
+print('A   A     V V')
+print('A   A      V')
