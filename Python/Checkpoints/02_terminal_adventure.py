@@ -43,14 +43,14 @@ Ch_attack2_name= "Scratch" ; Ch_attack2_damage = 5
 Ch_attack3_name= "Flamethrower" ; Ch_attack3_damage = 8
 Ch_attack4_name= "Dragon Breath" ; Ch_attack4_damage = 7
 
-Sq = (f"{BLUE}Squirtle{RESET}")
+Sq = (f"{BLUE} Squirtle {RESET}")
 Sq_LvL = 5 ; Sq_HP = 30
 Sq_attack1_name= "Water Gun" ; Sq_attack1_damage = 6
 Sq_attack2_name= "Tackle" ; Sq_attack2_damage = 5
 Sq_attack3_name= "Bubble" ; Sq_attack3_damage = 6
 Sq_attack4_name= "Hydro Pump" ; Sq_attack4_damage = 8
 
-Bu = (f"{GREEN}Bulbasaur{RESET}")
+Bu = (f"{GREEN}Bulbasaur {RESET}")
 Bu_LvL = 5 ; Bu_HP = 29
 Bu_attack1_name= "Vine Whip" ; Bu_attack1_damage = 6
 Bu_attack2_name= "Headbutt" ; Bu_attack2_damage = 5
@@ -58,7 +58,7 @@ Bu_attack3_name= "Leech Seed" ; Bu_attack3_damage = 6
 Bu_attack4_name= "Razor Leaf" ; Bu_attack4_damage = 7
 
 print(" ________________________________________________________________________")
-print(f"|   🔥 {Ch} 🔥   |    💧 {Sq} 💧     |     🌱 {Bu} 🌱     |")   #I know this might bother perfectionists like me, but I have to leave it this way to print correctly in the log.
+print(f"|   🔥 {Ch} 🔥   |   💧 {Sq} 💧    |     🌱 {Bu}🌱     |")   #I know this might bother perfectionists like me, but I have to leave it this way to print correctly in the log.
 print("|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|")    
 print(f"| 1. {Ch_attack1_name}              | 1. {Sq_attack1_name}         | 1. {Bu_attack1_name}            |")
 print(f"| 2. {Ch_attack2_name}            | 2. {Sq_attack2_name}            | 2. {Bu_attack2_name}             |")
@@ -71,21 +71,21 @@ print("")
 # Now it's time for the player to choose their main Pokémon. First I create the variable for the pokemon and his atributes for each trainer, then I will use a "while" loop to ensure the player picks a number between 1, 2, or 3. Originally, the main character's rival in Pokémon was 'Gary,' the grandson of Professor Oak. We will also define the Pokémon that your adversary will choose in this game."
 
 MyPokemon = 0
-My_LvL = 0 ; My_HP = 0 ; My_xp = 0
+My_LvL = 0 ; My_HP = 1 ; My_xp = 0
 My_attack1_name= " " ; My_attack1_damage = 0
 My_attack2_name= " " ; My_attack2_damage = 0
 My_attack3_name= " " ; My_attack3_damage = 0
 My_attack4_name= " " ; My_attack4_damage = 0
 
 GaryPokemon = 0
-Ga_LvL = 0 ; My_HP = 0 ; Ga_xp = 0
+Ga_LvL = 0 ; My_HP = 1 ; Ga_xp = 0
 Ga_attack1_name= " " ; Ga_attack1_damage = 0
 Ga_attack2_name= " " ; Ga_attack2_damage = 0
 Ga_attack3_name= " " ; Ga_attack3_damage = 0
 Ga_attack4_name= " " ; Ga_attack4_damage = 0
 
 while MyPokemon != 1 and  MyPokemon != 2 and MyPokemon != 3:
-    MyPokemon = int(input(f"Time to choose your starter Pokémon! Type {BOLDWHITE}1{RESET} for {Ch}, {BOLDWHITE}2{RESET} for {Sq}, or {BOLDWHITE}3{RESET} for {Bu}: "))
+    MyPokemon = int(input(f"Time to choose your starter Pokémon! Type {BOLDWHITE}1{RESET} for {Ch} {BOLDWHITE}2{RESET} for {Sq} or {BOLDWHITE}3{RESET} for {Bu}: "))
     if MyPokemon != 1 and  MyPokemon != 2 and MyPokemon != 3:
         print(f"⚠️  Error: You selected '{MyPokemon}' but only options 1, 2, or 3 are valid.")
         print(" ")
@@ -166,8 +166,35 @@ print(f"|{BWHITE}{BLACK}  to a battle right now to test the mettle of your new P
 print(f"|{BWHITE}__________________________________________________________________{RESET}|")
 print(" ")
 print(" ")
-print("Gary: Ready to learn how real battle Pokemon is done? Let's see if your Pokémon can stand up to mine!")
-print (f"{ITALICS}Gary has sent out {GaryPokemon}!")
+print("Gary: Ready to learn how real Pokemon battle is done? Let's see if your Pokémon can stand up to mine!")
+print (f"Come on, {GaryPokemon}! {ITALICS}Gary has sent out {GaryPokemon}")
 print(" ")
 print("You: Bring it on, Gary! I believe in my Pokémon, even if we've just started our journey together!")
-print(f"{ITALICS}You have sent our {MyPokemon}!")
+print(f"Come on, {MyPokemon}! {ITALICS}You have sent out {MyPokemon}")
+
+
+#Combat variables that I need to procees the combat, 
+
+Action = 0
+Turn = 0
+
+
+while My_HP != 20 and Ga_HP != 20:
+    print(" __________________________________________________________ ")
+    print("|                                                          |")
+    print(f"| {GaryPokemon}    Lv {Ga_LvL}                                       |")
+    print(f"| Hp:{Ga_HP}                                                    |")
+    print(f"|                                       {MyPokemon}    Lv {My_LvL} |")
+    print(f"|                                                    Hp:{My_HP} |")
+    print("|__________________________________________________________| ")
+    print(f"|What will {MyPokemon} do?                                  | ")
+    print(f"|     {BOLDWHITE}1{RESET} Fight    {BOLDWHITE}2{RESET} Pokemon       {BOLDWHITE}3{RESET} Bag         {BOLDWHITE}4{RESET} Run       | ")
+    print(f"|__________________________________________________________| ")
+
+    while Action != 1 and Action != 2 and Action != 3 and Action != 4:
+          Action = int(input("Type your option here: "))
+          if Action == 1:
+            int(input("Choose attack: {BOLDWHITE}→ 1{RESET} {My_attack1_name} - {BOLDWHITE}→ 2{RESET} {My_attack2_name} - {BOLDWHITE}→ 3{RESET} {My_attack3_name} - {BOLDWHITE}→ 4{RESET} {My_attack4_name} "))
+                  
+  
+    print("fin bucle")
