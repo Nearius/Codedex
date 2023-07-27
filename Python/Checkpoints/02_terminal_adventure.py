@@ -15,6 +15,8 @@ UNDERLINE = "\033[24m"
 BOLDRED = "\033[1;31m"
 BOLDGREEN = "\033[1;32m"
 BOLDWHITE = "\033[1;33m"
+BOLDBLACK = "\033[1;30m"
+BOLDBLUE = "\033[1;36m"
 
 print(" _____     ___    _  __   ______   __  __    ___    _   _ ")
 print("|  __ \   / _ \  | |/ /  |  ____| |  \/  |  / _ \  | \ | |")
@@ -173,13 +175,31 @@ print("You: Bring it on, Gary! I believe in my Pokémon, even if we've just star
 print(f"Come on, {MyPokemon}! {ITALICS}You have sent out {MyPokemon}")
 
 
-#Combat variables that I need to procees the combat, 
+#Combat variables that I need to procees the combat, and let's add some emotions for our Pokemon
 
 Action = 0
 Turn = 0
+emotion = 0
+My_Top_HP = My_HP
+MychoosedAttack = 0
+Myattackname = -1
+Objectselected = -1
 
+while My_HP != 20 and Ga_HP != 20 and Action != 1 and Action != 2:
+    emotion = random.randint(1,5)
+    if emotion == 1:
+         emotion = ("Your Pokémon eagerly waits for you.    ")
+    elif emotion == 2:
+         emotion = ("Your Pokémon is ready for action.      ")
+    elif emotion == 3:
+         emotion = ("Your Pokémon anticipates a command.    ")
+    elif emotion == 4:
+         emotion = ("Your Pokémon is brimming with energy.  ")
+    elif emotion == 5:
+         emotion = ("Your Pokémon stares with determination.")
+    else:
+        emotion == ("Your Pokémon feels scared."             )
 
-while My_HP != 20 and Ga_HP != 20:
     print(" __________________________________________________________ ")
     print("|                                                          |")
     print(f"| {GaryPokemon}    Lv {Ga_LvL}                                       |")
@@ -187,14 +207,81 @@ while My_HP != 20 and Ga_HP != 20:
     print(f"|                                       {MyPokemon}    Lv {My_LvL} |")
     print(f"|                                                    Hp:{My_HP} |")
     print("|__________________________________________________________| ")
+    print(f"|{emotion}                   {RESET}| ")
     print(f"|What will {MyPokemon} do?                                  | ")
-    print(f"|     {BOLDWHITE}1{RESET} Fight    {BOLDWHITE}2{RESET} Pokemon       {BOLDWHITE}3{RESET} Bag         {BOLDWHITE}4{RESET} Run       | ")
-    print(f"|__________________________________________________________| ")
+    print(f"|{BWHITE}{BLACK}                                                          {RESET}| ")
+    print(f"|{BWHITE}{BLACK}    {RESET}{BOLDWHITE}1{RESET} Fight ⚔️  | {BOLDWHITE}2{RESET} Pokemon 🦁 |  {BOLDWHITE}3{RESET} Bag 👜  | {BOLDWHITE}4{RESET} Run🏃💨{BWHITE}{BLACK}    {RESET}| ")
+    print(f"|{BWHITE}{BLACK}__________________________________________________________{RESET}| ")
 
-    while Action != 1 and Action != 2 and Action != 3 and Action != 4:
-          Action = int(input("Type your option here: "))
+    while Action != 1 and Action != 2 and Action != 3 and Action != 4 and Myattackname != " 1"  and Objectselected != " 1":
+          print(" ")
+          Action = int(input("Type your number option here: "))
+          print(" ")
+       
           if Action == 1:
-            int(input("Choose attack: {BOLDWHITE}→ 1{RESET} {My_attack1_name} - {BOLDWHITE}→ 2{RESET} {My_attack2_name} - {BOLDWHITE}→ 3{RESET} {My_attack3_name} - {BOLDWHITE}→ 4{RESET} {My_attack4_name} "))
-                  
+            print(f"           {BOLDBLUE}        ⚔️  Fight   Menu ⚔️{RESET}")
+            print(" ")
+            print("Type your attack or Type 0 to return to the main menu.")
+            MychoosedAttack = int(input(f"{BOLDWHITE}→ 1{RESET} {My_attack1_name} {BOLDWHITE}→ 2{RESET} {My_attack2_name} {BOLDWHITE}→ 3{RESET} {My_attack3_name} {BOLDWHITE}→ 4{RESET} {My_attack4_name} "))
+            Myattackdmg = 0                  
+          elif Action == 2:
+            print("No tienes otro Pokemon")
+          elif Action == 3:
+            Objectselected = int(input(f"⚔️: {BOLDWHITE}→ 1{RESET} Potion  {BOLDWHITE} "))
+          elif Action == 4:
+            print("No puedes huir!")
+          else:
+            print("Recuerda escribir un numero para elegir una acción")  
+
+       
+          if  MychoosedAttack == 1:
+                    Myattackname = My_attack1_name
+                    Myattackdmg = My_attack1_damage
+                    print(My_attack1_name)
+                    print(Myattackname)
+          elif MychoosedAttack == 2:
+                    Myattackname = My_attack2_name
+                    Myattackdmg = My_attack2_damage
+                    print(My_attack2_name)
+          elif MychoosedAttack == 3:
+                    Myattackname = My_attack3_name
+                    Myattackdmg = My_attack3_damage
+                    print(My_attack3_name)
+          elif MychoosedAttack == 4:
+                    Myattackname = My_attack4_name
+                    Myattackdmg = My_attack4_damage
+                    print(My_attack4_name)
+          elif MychoosedAttack == 0:
+                
+                    Action = 0
+                    print(" ")
+                    print(f"           {BOLDBLUE}        ⭐  Main Menu ⭐{RESET}")
+                    print(" ")
+                    print(f"{BWHITE}{BLACK}                                                          {RESET} ")
+                    print(f"{BWHITE}{BLACK}    {RESET}{BOLDWHITE}1{RESET} Fight ⚔️  | {BOLDWHITE}2{RESET} Pokemon 🦁 |  {BOLDWHITE}3{RESET} Bag 👜  | {BOLDWHITE}4{RESET} Run🏃💨{BWHITE}{BLACK}    {RESET} ")
+                    print(f"{BWHITE}{BLACK}__________________________________________________________{RESET} ")
+          else: 
+                   Action = 0
+                   print(f"{RED} Invalid attack. Only options 1, 2, 3, or 4 are available.{RESET}")
+                   print(" ")
+                   print(f"           {BOLDBLUE}        ⭐  Main Menu⭐{RESET}")
+                   print(" ")
+                   print(f"{BWHITE}{BLACK}                                                          {RESET} ")
+                   print(f"{BWHITE}{BLACK}    {RESET}{BOLDWHITE}1{RESET} Fight ⚔️  | {BOLDWHITE}2{RESET} Pokemon 🦁 |  {BOLDWHITE}3{RESET} Bag 👜  | {BOLDWHITE}4{RESET} Run🏃💨{BWHITE}{BLACK}    {RESET} ")
+                   print(f"{BWHITE}{BLACK}__________________________________________________________{RESET} ")
+               
+         # if  Objectselected == 1:
+          #    Objectselected = " "
+           #   if My_Top_HP  >= My_HP:
+            #     My_HP = My_Top_HP
+             #    print(f"Your {MyPokemon} recover 15 Health points, now is {My_HP}")
+              #else:
+               #  My_HP +  15   
+                # print(f"Your {MyPokemon} recover 15 Health points, now is {My_HP}")
+
+                    
+    print(" ")
+    print(f"{MyPokemon} use {Myattackname}")
+              
   
     print("fin bucle")
