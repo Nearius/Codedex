@@ -183,11 +183,13 @@ emotion = 0
 My_Top_HP = My_HP
 MychoosedAttack = " "
 Myattackname = " "
+Myattackdmg = 0
 Objectselected = " "
 Advance = " "
+Action = 0
 
 
-while My_HP != 20 and Ga_HP != 20 and Action != 1 and Action != 2:
+while My_HP != 0 and Ga_HP != 0:
     emotion = random.randint(1,5)
     if emotion == 1:
          emotion = ("Your Pokémon eagerly waits for you.    ")
@@ -203,19 +205,20 @@ while My_HP != 20 and Ga_HP != 20 and Action != 1 and Action != 2:
         emotion == ("Your Pokémon feels scared."             )
 
 
-    while Turn == 0:   
+    
 
-     print(" __________________________________________________________ ")
-     print("|                                                          |")
-     print(f"| {GaryPokemon}    Lv {Ga_LvL}                                       |")
-     print(f"| Hp:{Ga_HP}                                                    |")
-     print(f"|                                       {MyPokemon}    Lv {My_LvL} |")
-     print(f"|                                                    Hp:{My_HP} |")
-     print("|__________________________________________________________| ")
-     print(f"|{emotion}                   {RESET}| ")
-     print(f"|What will {MyPokemon} do?                                  | ")
-       
-     while Action != 1 and Action != 2 and Action != 3 and Action != 4 and Myattackname != " 1"  and Objectselected != " 1" and Advance != "ok":
+    print(" __________________________________________________________ ")
+    print("|                                                          |")
+    print(f"| {GaryPokemon}    Lv {Ga_LvL}                                       |")
+    print(f"| Hp:{Ga_HP}                                                    |")
+    print(f"|                                       {MyPokemon}    Lv {My_LvL} |")
+    print(f"|                                                    Hp:{My_HP} |")
+    print("|__________________________________________________________| ")
+    print(f"|{emotion}                   {RESET}| ")
+    print(f"|What will {MyPokemon} do?                                  | ")
+    
+    Action=0   
+    while Action != 1 and Action != 2 and Action != 3 and Action != 4 and Myattackname != " 1"  and Objectselected != " 1":
           print(f"|{BWHITE}{BLACK}                                                          {RESET}| ")
           print(f"|{BWHITE}{BLACK}    {RESET}{BOLDWHITE}1{RESET} Fight ⚔️  | {BOLDWHITE}2{RESET} Pokemon 🦁 |  {BOLDWHITE}3{RESET} Bag 👜  | {BOLDWHITE}4{RESET} Run🏃💨{BWHITE}{BLACK}    {RESET}| ")
           print(f"|{BWHITE}{BLACK}__________________________________________________________{RESET}| ")
@@ -224,7 +227,7 @@ while My_HP != 20 and Ga_HP != 20 and Action != 1 and Action != 2:
           print(" ")
        
           if Action == 1:
-            while MychoosedAttack != 1 and MychoosedAttack != 2 and MychoosedAttack != 3 and MychoosedAttack != 4 and Advance != "ok":
+            while MychoosedAttack != 1 and MychoosedAttack != 2 and MychoosedAttack != 3 and MychoosedAttack != 4:
              print(f"           {BOLDBLUE}        ⚔️  Fight   Menu ⚔️{RESET}")
              print(" ")
              print("Type your attack or Type 0 to return to the main menu.")
@@ -236,22 +239,29 @@ while My_HP != 20 and Ga_HP != 20 and Action != 1 and Action != 2:
             
              elif  MychoosedAttack == 1:
                     Myattackname = My_attack1_name
-                    Myattackdmg = My_attack1_damage         
+                    Myattackdmg = My_attack1_damage
+                         
              elif  MychoosedAttack == 2:
                     Myattackname = My_attack2_name
-                    Myattackdmg =  My_attack2_damage  
+                    Myattackdmg =  My_attack2_damage
+                     
              elif  MychoosedAttack == 3:
                     Myattackname = My_attack3_name
-                    Myattackdmg =  My_attack3_damage 
+                    Myattackdmg =  My_attack3_damage
+                    
              elif  MychoosedAttack == 4:
                     Myattackname = My_attack4_name
                     Myattackdmg =  My_attack4_damage
+                    
              else:     
                     print("else, continuamos al siguiente menu")
-                    Advance = "ok"
-             print(MychoosedAttack , Myattackname , Myattackdmg )       
-             input("He salido del blucle? ") 
-
+                  
+             print(" ")       
+             
+             print(f"{MyPokemon} use {Myattackname}: {GaryPokemon} lose {Myattackdmg}")
+             Ga_HP = Ga_HP - Myattackdmg  
+             print(f"A {GaryPokemon} le quedan {Ga_HP} puntos de vida") 
+             input("continuamos?? ataqq") 
           elif Action == 2:
            
               print("No tienes otros Pokemon")
@@ -283,11 +293,25 @@ while My_HP != 20 and Ga_HP != 20 and Action != 1 and Action != 2:
 
                print(" ")
                print(f"{MyPokemon} use {Myattackname}")
-               Action = 0      
-               input(f" {Objectselected},{My_HP} , {My_Top_HP} ?:")
+          
+          MychoosedAttack = " "
+          Myattackname = " "
+          Myattackdmg = 0
+          Objectselected = " "
+          Turn = 0
+          emotion = 0
+          Advance = " "
+
+
+          
+          input(f" {Objectselected},{My_HP} , {My_Top_HP} ?:")
                    
     print(" ")
     print(f"{MyPokemon} use {Myattackname}")
               
   
     print("fin bucle")
+
+    print(f"{MyPokemon} use {Myattackname}: {GaryPokemon} lose {Myattackdmg}")
+    Ga_HP = Ga_HP - Myattackdmg       
+    print(f"A {GaryPokemon} le quedan {Ga_HP} puntos de vida")   
