@@ -258,10 +258,13 @@ while My_HP != 0 and Ga_HP != 0:
                   
              print(" ")       
              
-             print(f"{MyPokemon} use {Myattackname}: {GaryPokemon} lose {Myattackdmg}")
+             print(f"💥 {MyPokemon} use {Myattackname}: {GaryPokemon} lose {Myattackdmg}")
              Ga_HP = Ga_HP - Myattackdmg  
-             print(f"A {GaryPokemon} le quedan {Ga_HP} puntos de vida") 
-             input("continuamos?? ataqq") 
+             if Ga_HP == Ga_HP <= 0:
+               Ga_HP = 0
+            print(f"A {GaryPokemon} le quedan {Ga_HP} puntos de vida") 
+             
+        
           elif Action == 2:
            
               print("No tienes otros Pokemon")
@@ -292,7 +295,7 @@ while My_HP != 0 and Ga_HP != 0:
                Action = 0   
 
                print(" ")
-               print(f"{MyPokemon} use {Myattackname}")
+              # print(f"{MyPokemon} use {Myattackname}")
           
           MychoosedAttack = " "
           Myattackname = " "
@@ -304,14 +307,11 @@ while My_HP != 0 and Ga_HP != 0:
 
 
           
-          input(f" {Objectselected},{My_HP} , {My_Top_HP} ?:")
-                   
-    print(" ")
-    print(f"{MyPokemon} use {Myattackname}")
+         # input(f" {Objectselected},{My_HP} , {My_Top_HP} ?:")
+print(" ")
+  #  print(f"{MyPokemon} use {Myattackname}")
               
-  
-    print("fin bucle")
+print("fin bucle")
 
-    print(f"{MyPokemon} use {Myattackname}: {GaryPokemon} lose {Myattackdmg}")
-    Ga_HP = Ga_HP - Myattackdmg       
-    print(f"A {GaryPokemon} le quedan {Ga_HP} puntos de vida")   
+    #print(f"{MyPokemon} use {Myattackname}: {GaryPokemon} lose {Myattackdmg}")
+  
