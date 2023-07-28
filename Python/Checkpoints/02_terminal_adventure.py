@@ -39,28 +39,30 @@ print(" ")
 # I will store each Pokémon with its variable indicating the color it will have, so the code will be cleaner from now on.and also his attacks, hp, and lvl's"
 
 Ch = (f"{RED}Charmander{RESET}")
-Ch_LvL = 5 ; Ch_HP = 28
+Ch_LvL = 5 ; Ch_HP = 48
 Ch_attack1_name= "Ember" ; Ch_attack1_damage = 6
 Ch_attack2_name= "Scratch" ; Ch_attack2_damage = 5
 Ch_attack3_name= "Flamethrower" ; Ch_attack3_damage = 8
 Ch_attack4_name= "Dragon Breath" ; Ch_attack4_damage = 7
 
-Sq = (f"{BLUE} Squirtle {RESET}")
-Sq_LvL = 5 ; Sq_HP = 30
+Sq = (f"{BLUE}Squirtle{RESET}")
+Sqspace = ("  ")
+Sq_LvL = 5 ; Sq_HP = 50
 Sq_attack1_name= "Water Gun" ; Sq_attack1_damage = 6
 Sq_attack2_name= "Tackle" ; Sq_attack2_damage = 5
 Sq_attack3_name= "Bubble" ; Sq_attack3_damage = 6
 Sq_attack4_name= "Hydro Pump" ; Sq_attack4_damage = 8
 
-Bu = (f"{GREEN}Bulbasaur {RESET}")
-Bu_LvL = 5 ; Bu_HP = 29
+Bu = (f"{GREEN}Bulbasaur{RESET}")
+Buspace = (" ")
+Bu_LvL = 5 ; Bu_HP = 49
 Bu_attack1_name= "Vine Whip" ; Bu_attack1_damage = 6
 Bu_attack2_name= "Headbutt" ; Bu_attack2_damage = 5
 Bu_attack3_name= "Leech Seed" ; Bu_attack3_damage = 6
 Bu_attack4_name= "Razor Leaf" ; Bu_attack4_damage = 7
 
 print(" ________________________________________________________________________")
-print(f"|   🔥 {Ch} 🔥   |   💧 {Sq} 💧    |     🌱 {Bu}🌱     |")   #I know this might bother perfectionists like me, but I have to leave it this way to print correctly in the log.
+print(f"|   🔥 {Ch} 🔥   |   💧  {Sq}  💧{Sqspace}  |     🌱 {Bu}{Buspace}🌱     |")   #I know this might bother perfectionists like me, but I have to leave it this way to print correctly in the log.
 print("|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|")    
 print(f"| 1. {Ch_attack1_name}              | 1. {Sq_attack1_name}         | 1. {Bu_attack1_name}            |")
 print(f"| 2. {Ch_attack2_name}            | 2. {Sq_attack2_name}            | 2. {Bu_attack2_name}             |")
@@ -194,34 +196,50 @@ Advance = " "
 Action = 0
 
 
+
 while My_HP != 0 and Ga_HP != 0:
     emotion = random.randint(1,5)
     if emotion == 1:
-         emotion = ("Your Pokémon eagerly waits for you.    ")
+         emotion = ("Your Pokémon eagerly waits for you🐾 ❤️     ")
     elif emotion == 2:
-         emotion = ("Your Pokémon is ready for action.      ")
+         emotion = ("Your Pokémon is ready for action. 💪🔥     ")
     elif emotion == 3:
-         emotion = ("Your Pokémon anticipates a command.    ")
+         emotion = ("Your Pokémon awaits your next move🧠🔍     ")
     elif emotion == 4:
-         emotion = ("Your Pokémon is brimming with energy.  ")
+         emotion = ("Your Pokémon is brimming with energy⚡🌀   ")
     elif emotion == 5:
-         emotion = ("Your Pokémon stares with determination.")
+         emotion = ("Your Pokémon stares with determination.👾🌟")
     else:
-        emotion == ("Your Pokémon feels scared."             )
+        emotion == ("Your Pokémon feels scared. 😨👻            ")
 
 
     
 
     print(" __________________________________________________________ ")
     print("|                                                          |")
-    print(f"| {GaryPokemon}    Lv {Ga_LvL}                                       |")
+    if   GaryPokemon == Sq:
+         print(f"| {GaryPokemon}{Sqspace}    Lv {Ga_LvL}                                       |")
+    elif GaryPokemon == Ch:
+         print(f"| {GaryPokemon}    Lv {Ga_LvL}                                       |")
+    else: 
+         print(f"| {GaryPokemon}{Buspace}    Lv {Ga_LvL}                                       |")     
     print(f"| Hp:{Ga_HP}                                                    |")
-    print(f"|                                       {MyPokemon}    Lv {My_LvL} |")
+    if   MyPokemon == Sq:
+         print(f"|                                       {MyPokemon}{Sqspace}    Lv {My_LvL} |")
+    elif MyPokemon == Ch:    
+         print(f"|                                       {MyPokemon}    Lv {My_LvL} |")
+    else:
+         print(f"|                                       {MyPokemon}{Buspace}    Lv {My_LvL} |")     
     print(f"|                                                    Hp:{My_HP} |")
     print("|__________________________________________________________| ")
-    print(f"|{emotion}                   {RESET}| ")
-    print(f"|What will {MyPokemon} do?                                  | ")
-    
+    print(f"|{emotion}               {RESET}| ")
+    if   MyPokemon == Sq:
+         print(f"|What will {MyPokemon}{Sqspace} do?                                  | ")
+    elif MyPokemon == Bu:
+         print(f"|What will {MyPokemon}{Buspace} do?                                  | ")   
+    else:      
+         print(f"|What will {MyPokemon} do?                                  | ")
+
     Action=0   
     while Action != 1 and Action != 2 and Action != 3 and Action != 4 and Myattackname != " 1"  and Objectselected != " 1":
           print(f"|{BWHITE}{BLACK}                                                          {RESET}| ")
@@ -241,16 +259,16 @@ while My_HP != 0 and Ga_HP != 0:
 
           if   Ga_Random_Attack == 1:
                Gaattackname = Ga_attack1_name
-               Gaattackdmg = Ga_attack1_damage 
+               Gaattackdmg  = Ga_attack1_damage * 2
           elif Ga_Random_Attack  == 2:
                Gaattackname = Ga_attack2_name
-               Gaattackdmg = Ga_attack2_damage 
+               Gaattackdmg  = Ga_attack2_damage 
           elif Ga_Random_Attack  == 3:
                Gaattackname = Ga_attack3_name
-               Gaattackdmg = Ga_attack3_damage     
+               Gaattackdmg  = Ga_attack3_damage * 2    
           elif Ga_Random_Attack  == 4:
                Gaattackname = Ga_attack4_name
-               Gaattackdmg = Ga_attack4_damage
+               Gaattackdmg  = Ga_attack4_damage * 2
           else:
               print("")     
                                  
@@ -290,9 +308,8 @@ while My_HP != 0 and Ga_HP != 0:
              fails = 0
              fails = random.randint(0,10)
              
-             print(f"Random order: {Random_Order} fails: {fails}  Gafail{Ga_fail}")
-
-
+            print("============================================================")
+            
             if Random_Order == 0 or Random_Order == 2 or Random_Order == 4 or Random_Order == 6 or Random_Order == 7 or Random_Order == 8 or Random_Order == 10:
                Turn == 1
                
@@ -305,25 +322,25 @@ while My_HP != 0 and Ga_HP != 0:
             if Turn != 2:
                               
                  if  fails == 1 or fails == 3 or fails == 7:
-                    print(f"{MyPokemon} use {Myattackname}: but fail!") 
+                    print(f"{MyPokemon} used {Myattackname}: but it failed!😲") 
                                                   
                  else:
                   print(f"💥 {MyPokemon} used {Myattackname}: {GaryPokemon} took {BOLDRED}{Myattackdmg}{RESET} damage!")
                   Ga_HP = Ga_HP - Myattackdmg      
                   if Ga_HP == Ga_HP <= 0:
                      Ga_HP = 0
-                  print(f"  {GaryPokemon} has {Ga_HP}HP left")
+                  print(f"🤕 {GaryPokemon} has {Ga_HP} HP left.")
           
                 
                  if   Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7:
-                  print(f"{GaryPokemon} use {Gaattackname}: but fail!")    
+                  print(f"{GaryPokemon} used {Gaattackname}: but it failed!😲")    
 
                  else:
                   print(f"💥 {GaryPokemon} used {Gaattackname}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
                   My_HP = My_HP - Gaattackdmg      
                   if My_HP == My_HP <= 0:
                      My_HP = 0
-                  print(f"    {MyPokemon} has {My_HP}HP left")  
+                  print(f"🤕 {MyPokemon} has {My_HP} HP left.")  
 
             else: 
                  if   Ga_fail == 1 or 3 or 7:
@@ -357,7 +374,7 @@ while My_HP != 0 and Ga_HP != 0:
 
              
              
-            print("turno de quien")
+            print("============================================================")
           elif Action == 2:
            
               print("No tienes otros Pokemon")
