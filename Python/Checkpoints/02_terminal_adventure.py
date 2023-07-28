@@ -23,7 +23,7 @@ print("|  __ \   / _ \  | |/ /  |  ____| |  \/  |  / _ \  | \ | |")
 print("| |__) | | | | | |   /   | |___   | \  / | | | | | |  \| |")
 print("|  ___/  | | | | |  <    |  ___|  | |\/| | | | | | | . ` |")
 print("| |      | |_| | | . \   | |____  | |  | | | |_| | | |\  |")
-print("|_|       \___/  |_|\_\  |______| |_|  |_|  \___/  |_| \_|")
+print("|_|       \___/  |_|\_\  |______| |_|  |_|  \___/  |_| \_|  By Nearius" )
 print("")
 
 print(" _________________________________________________________________________ ")
@@ -178,12 +178,17 @@ print(f"Come on, {MyPokemon}! {ITALICS}You have sent out {MyPokemon}")
 #Combat variables that I need to procees the combat, and let's add some emotions for our Pokemon
 
 Action = 0
-Turn = 0
+Turn = " "
 emotion = 0
 My_Top_HP = My_HP
+Ga_Top_HP = Ga_HP
 MychoosedAttack = " "
 Myattackname = " "
+Gaattackname = " "
+GachooseAttack = " "
+GachooseAttackdmg = " "
 Myattackdmg = 0
+Gaattackdmg = 0
 Objectselected = " "
 Advance = " "
 Action = 0
@@ -225,6 +230,30 @@ while My_HP != 0 and Ga_HP != 0:
           print(" ")
           Action = int(input("Type your number option here: "))
           print(" ")
+
+          Random_Order = 0
+          Random_Order = random.randint(0,11)
+
+          Ga_Random_Attack = 0   #por DESCRIBIR Esto
+          Ga_Random_Attack = random.randint(1,5)
+          Ga_fail = 0
+          Ga_fail = random.randint(1,10)
+
+          if   Ga_Random_Attack == 1:
+               Gaattackname = Ga_attack1_name
+               Gaattackdmg = Ga_attack1_damage 
+          elif Ga_Random_Attack  == 2:
+               Gaattackname = Ga_attack2_name
+               Gaattackdmg = Ga_attack2_damage 
+          elif Ga_Random_Attack  == 3:
+               Gaattackname = Ga_attack3_name
+               Gaattackdmg = Ga_attack3_damage     
+          elif Ga_Random_Attack  == 4:
+               Gaattackname = Ga_attack4_name
+               Gaattackdmg = Ga_attack4_damage
+          else:
+              print("")     
+                                 
        
           if Action == 1:
             while MychoosedAttack != 1 and MychoosedAttack != 2 and MychoosedAttack != 3 and MychoosedAttack != 4:
@@ -255,16 +284,80 @@ while My_HP != 0 and Ga_HP != 0:
                     
              else:     
                     print("else, continuamos al siguiente menu")
-                  
+              
+            
              print(" ")       
+             fails = 0
+             fails = random.randint(0,10)
              
-             print(f"💥 {MyPokemon} use {Myattackname}: {GaryPokemon} lose {Myattackdmg}")
-             Ga_HP = Ga_HP - Myattackdmg  
-             if Ga_HP == Ga_HP <= 0:
-               Ga_HP = 0
-            print(f"A {GaryPokemon} le quedan {Ga_HP} puntos de vida") 
+             print(f"Random order: {Random_Order} fails: {fails}  Gafail{Ga_fail}")
+
+
+            if Random_Order == 0 or Random_Order == 2 or Random_Order == 4 or Random_Order == 6 or Random_Order == 7 or Random_Order == 8 or Random_Order == 10:
+               Turn == 1
+               
+            else:
+               Turn == 2
+               
+
+                 
+              
+            if Turn != 2:
+                              
+                 if  fails == 1 or fails == 3 or fails == 7:
+                    print(f"{MyPokemon} use {Myattackname}: but fail!") 
+                                                  
+                 else:
+                  print(f"💥 {MyPokemon} used {Myattackname}: {GaryPokemon} took {BOLDRED}{Myattackdmg}{RESET} damage!")
+                  Ga_HP = Ga_HP - Myattackdmg      
+                  if Ga_HP == Ga_HP <= 0:
+                     Ga_HP = 0
+                  print(f"  {GaryPokemon} has {Ga_HP}HP left")
+          
+                
+                 if   Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7:
+                  print(f"{GaryPokemon} use {Gaattackname}: but fail!")    
+
+                 else:
+                  print(f"💥 {GaryPokemon} used {Gaattackname}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
+                  My_HP = My_HP - Gaattackdmg      
+                  if My_HP == My_HP <= 0:
+                     My_HP = 0
+                  print(f"    {MyPokemon} has {My_HP}HP left")  
+
+            else: 
+                 if   Ga_fail == 1 or 3 or 7:
+                  print(f"{GaryPokemon} use {Gaattackname}: but fail!")    
+
+                 elif Ga_fail == 0 or Ga_fail == 2 or Ga_fail == 4 or Ga_fail == 5 or Ga_fail ==  6 or Ga_fail == 8 or Ga_fail == 9 or Ga_fail == 10:
+                  print(f"💥 {GaryPokemon} used {Gaattackname}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
+                  My_HP = My_HP - Gaattackdmg      
+                  if My_HP == My_HP <= 0:
+                     My_HP = 0
+                  print(f"    {MyPokemon} has {My_HP} left")
+
+                 if fails == 1 or fails == 3 or fails == 7:
+                  print(f"💥 {MyPokemon} use {Myattackname}: but fail!")    
+                  
+                  
+                 elif fails == 0 or fails == 2 or fails == 4 or fails == 5 or fails == 6 or fails == 8 or fails == 9 or fails == 10:
+                  print(f"💥 {MyPokemon} used {Myattackname}: {GaryPokemon} took {BOLDRED}{Myattackdmg}{RESET} damage!")
+                  Ga_HP = Ga_HP - Myattackdmg      
+                  if Ga_HP == Ga_HP <= 0:
+                     Ga_HP = 0
+                  print(f"    {GaryPokemon} has {Ga_HP} left") 
+
+               
+                
+              
              
-        
+            
+            
+            
+
+             
+             
+            print("turno de quien")
           elif Action == 2:
            
               print("No tienes otros Pokemon")
@@ -293,9 +386,7 @@ while My_HP != 0 and Ga_HP != 0:
                
                print("No puedes abandonar este combate")    
                Action = 0   
-
-               print(" ")
-              # print(f"{MyPokemon} use {Myattackname}")
+     
           
           MychoosedAttack = " "
           Myattackname = " "
