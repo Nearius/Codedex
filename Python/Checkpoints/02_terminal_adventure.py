@@ -1,6 +1,7 @@
-# 2º Checkpoint - Terminal project, I will try to make a mini-game inspired on POKEMN  I start importing random library and declaring variables for ANSI escape codes (to color the prints)and then a little introduction for the player.
+#<Terminal project, My 2n CheckPoint> I will try to make a mini-game inspired on POKEMoN  I start importing "random" library and declaring variables for ANSI escape codes (to color the prints).
 
 import random
+
 RED = "\033[31m"
 GREEN = "\033[32m"
 BLUE = "\033[36m"
@@ -8,7 +9,7 @@ BLACK = "\033[30m"
 BWHITE = "\033[47m"
 RESET = "\033[0m"  # Reset to default color
 
-# We can do the same with text formatting!
+# We do the same with text formatting!
 ITALICS = "\033[3;30m"
 UNDERLINE = "\033[24m"
 BOLDRED = "\033[1;31m"
@@ -17,6 +18,7 @@ BOLDWHITE = "\033[1;33m"
 BOLDBLACK = "\033[1;30m"
 BOLDBLUE = "\033[1;36m"
 
+# Introduction, We ask for the player's name for subsequent texts.
 print(" _____     ___    _  __   ______   __  __    ___    _   _ ")
 print("|  __ \   / _ \  | |/ /  |  ____| |  \/  |  / _ \  | \ | |")
 print("| |__) | | | | | |   /   | |___   | \  / | | | | | |  \| |")
@@ -26,16 +28,23 @@ print("|_|       \___/  |_|\_\  |______| |_|  |_|  \___/  |_| \_|  By Nearius" )
 print("")
 
 print(" _________________________________________________________________________ ")
-print(f"|{BWHITE}{BLACK}  Profesor Oak:                                                           {RESET}|")
+print(f"|{BWHITE}{BLACK}  🧓 Profesor Oak 🧓                                                      {RESET}|")
 print(f"|{BWHITE}{BLACK}  Welcome to the world of Pokémon! I'm Professor Oak. Every Pokémon       {RESET}|")
 print(f"|{BWHITE}{BLACK}  trainer starts by choosing their very first Pokémon. Today, you get to  {RESET}|")
 print(f"|{BWHITE}{BLACK}  to make that choice. Will it be the fiery Charmander, the water-loving  {RESET}|")
 print(f"|{BWHITE}{BLACK}  Squirtle, or the plant-powered Bulbasaur? The decision is yours!        {RESET}|")
 print(f"|{BWHITE}__________________________________________________________________________{RESET}|")
 print(" ")
+PlayerName = input(f"🧓 Oak: Before you begin your journey, please tell me, what is your name?: ")
+print(f"🧓 Oak: Oh yes, {PlayerName}! Now I remember you!")
+print("🧓 Oak: Now it's time to choose your first Pokemon 😃")
+input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
+print(" ")
+print(f"🧓 Oak: In front of you, there are three Pokémon. Each one has its own unique strengths:")
+print(f"🧓 Oak:🔥 Charmander, with the fiery tail; 💧 Squirtle, the water-loving turtle; and 🌱 Bulbasaur, whose back grows a special plant.")
+print(f"🧓 Oak: Choose wisely, as your choice will be your companion on this grand adventure!")
 
-
-# I will store each Pokémon with its variable indicating the color it will have, so the code will be cleaner from now on.and also his attacks, hp, and lvl's"
+# I will store each Pokémon along with its color variable to keep the code clean. Additionally, I'll include their attacks, HP, levels, and the original damage each attack inflicts.
 
 Ch = (f"{RED}Charmander{RESET}")
 Ch_LvL = 5 ; Ch_HP = 48
@@ -60,8 +69,12 @@ Bu_attack2_name= "Headbutt" ; Bu_attack2_damage = 5
 Bu_attack3_name= "Leech Seed" ; Bu_attack3_damage = 6
 Bu_attack4_name= "Razor Leaf" ; Bu_attack4_damage = 7
 
-print(" ________________________________________________________________________")
-print(f"|   🔥 {Ch} 🔥   |   💧  {Sq}  💧{Sqspace}  |     🌱 {Bu}{Buspace}🌱     |")   #I know this might bother perfectionists like me, but I have to leave it this way to print correctly in the log.
+#Graphic presentation in table format of the 3 Pokémon and their abilities
+#I know this might bother perfectionists like me, but I have to leave it this way to print correctly the table in the log.
+print(" ")
+print(" ")
+print(" ________________________________________________________________________") 
+print(f"|   🔥 {Ch} 🔥   |   💧  {Sq}  💧{Sqspace}  |     🌱 {Bu}{Buspace}🌱     |")  
 print("|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|")    
 print(f"| 1. {Ch_attack1_name}              | 1. {Sq_attack1_name}         | 1. {Bu_attack1_name}            |")
 print(f"| 2. {Ch_attack2_name}            | 2. {Sq_attack2_name}            | 2. {Bu_attack2_name}             |")
@@ -71,8 +84,9 @@ print("|_______________________|______________________|_________________________
 print("")
 print("")
 
-# Now it's time for the player to choose their main Pokémon. First I create the variable for the pokemon and his atributes for each trainer, then I will use a "while" loop to ensure the player picks a number between 1, 2, or 3. Originally, the main character's rival in Pokémon was 'Gary,' the grandson of Professor Oak. We will also define the Pokémon that your adversary will choose in this game."
-
+# Now, the player will choose their starter Pokémon. I'll first create variables for the Pokémon and its attributes for each trainer. I use prfix "My" for the player and "Ga" for Gary pokemon. 
+# I'll utilize a "while" loop to ensure the player picks a valid option (1, 2, or 3).
+# will also determine which Pokémon Gary chooses based on the player's choice. (Always the strong Element Pokemon againts Player-s Pokemon)
 MyPokemon = 0
 My_LvL = 0 ; My_HP = 1 ; My_xp = 0
 My_attack1_name= " " ; My_attack1_damage = 0
@@ -142,40 +156,44 @@ else:
     Ga_attack3_name= Ch_attack3_name ; Ga_attack3_damage = Ch_attack3_damage
     Ga_attack4_name= Ch_attack4_name ; Ga_attack4_damage = Ch_attack4_damage
 
-
-print(MyPokemon)
-print(My_LvL, My_HP, My_xp) 
-print(My_attack1_name, My_attack1_damage) 
-print(My_attack2_name, My_attack2_damage)
-print(My_attack3_name, My_attack3_damage )
-print(My_attack4_name, My_attack4_damage) 
-
-print(" ")
-print(GaryPokemon)
-print(Ga_LvL, Ga_HP, Ga_xp) 
-print(Ga_attack1_name, Ga_attack1_damage) 
-print(Ga_attack2_name, Ga_attack2_damage)
-print(Ga_attack3_name, Ga_attack3_damage )
-print(Ga_attack4_name, Ga_attack4_damage) 
-
-
+#Until this point, the player hasn't been introduced to Gary; he's only been referenced in the previous lines of code. Let's infuse some backstory and drama to make the upcoming battle more exhilarating.
 print(" __________________________________________________________________ ")
-print(f"|{BWHITE}{BLACK}  Profesor Oak:                                                   {RESET}|")
+print(f"|{BWHITE}{BLACK}                                                                  {RESET}|")
 print(f"|{BWHITE}{BLACK}  Now that you've made your choice, here's Gary! Remember him?    {RESET}|")
 print(f"|{BWHITE}{BLACK}  He's Professor Oak's grandson and your lifelong rival in the    {RESET}|")
 print(f"|{BWHITE}{BLACK}  world of Pokémon. He's never one to be outdone, so he's chosen  {RESET}|")
 print(f"|{BWHITE}{BLACK}  his own starter Pokémon. Brace yourself; Gary challenges you    {RESET}|")
 print(f"|{BWHITE}{BLACK}  to a battle right now to test the mettle of your new Pokémon!   {RESET}|")
 print(f"|{BWHITE}__________________________________________________________________{RESET}|")
+input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
 print(" ")
+print(f"😎 Gary: Heh, so you've chosen a {MyPokemon}, huh? It doesn't matter what you choose, because I'm always one step ahead!")
+print("😎 Gary: There's a reason I'm the Professor's grandson. Get ready to see the difference between an amateur and a future Pokémon Champion!")
+input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
+print(" 😎You: I'm always ready, Gary! Let the best trainer win!")
+input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
 print(" ")
-print("Gary: Ready to learn how real Pokemon battle is done? Let's see if your Pokémon can stand up to mine!")
-print (f"Come on, {GaryPokemon}! {ITALICS}Gary has sent out {GaryPokemon}")
-print(" ")
-print("You: Bring it on, Gary! I believe in my Pokémon, even if we've just started our journey together!")
-print(f"Come on, {MyPokemon}! {ITALICS}You have sent out {MyPokemon}")
 
+print(" __________________________________________________________________ ")
+print(f"|{BWHITE}{BLACK}  🧓 Profesor Oak 🧓                                                {RESET}|")
+print(f"|{BWHITE}{BLACK}  Wait just a moment, you two! Before you begin, I'm giving each    {RESET}|")
+print(f"|{BWHITE}{BLACK}  of you some potions. Battles can be tough, and it's crucial to    {RESET}|")
+print(f"|{BWHITE}{BLACK}  look after the well-being of your Pokémon. Don't push them to     {RESET}|")
+print(f"|{BWHITE}{BLACK}  their limits without care. Remember, a good trainer always        {RESET}|")
+print(f"|{BWHITE}{BLACK}  prioritizes the health and happiness of their Pokémon!            {RESET}|")
+print(f"|{BWHITE}__________________________________________________________________{RESET}|")
+print(f"{ITALICS}You store the potions in your inventory. Each one has a label stating it will heal up to 20 HP for your Pokémon.{RESET}")
 
+input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
+print(" ")
+
+print("😎 Gary: Ready to learn how real Pokemon battle is done? Let's see if your Pokémon can stand up to mine!")
+print (f"😎 Gary: Come on, {GaryPokemon}! {ITALICS}Gary has sent out {GaryPokemon}")
+print(" ")
+print(f"😁 {PlayerName}: Bring it on, Gary! I believe in my Pokémon, even if we've just started our journey together!")
+print(f"😁 {PlayerName}: Come on, {MyPokemon}! {ITALICS}{PlayerName} have sent out {MyPokemon}")
+print(" ")
+input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
 #Combat variables that I need to procees the combat, and let's add some emotions for our Pokemon
 
 Action = 0
@@ -318,17 +336,9 @@ while My_HP != 0 and Ga_HP != 0:
              print(" ")       
              fails = 0
              fails = random.randint(0,10)
-             Turn = random.randint(1,2)  
-             print("Turno", Turn) 
+             Turn = random.randint(1,2)             
             print("============================================================")
-            
-           # if Random_Order == 0 or Random_Order == 2 or Random_Order == 4 or Random_Order == 6 or Random_Order == 7 or Random_Order == 8 or Random_Order == 10:
-            #   Turn == 1
-               
-            #else:
-             #  Turn == 2
-
-               
+                           
             Turn = random.randint(1,2)  
             print("Turno", Turn)     
               
@@ -366,7 +376,7 @@ while My_HP != 0 and Ga_HP != 0:
 
             else: 
                  if  Gaattackname != "Potion" and  (Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5):
-                     print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 what", Ga_fail)   
+                     print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 ")   
                 
                  elif Ga_fail >= 0  and  Ga_Random_Attack == 5:
                   Ga_HP = Ga_HP + Gaattackdmg 
