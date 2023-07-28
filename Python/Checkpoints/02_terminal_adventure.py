@@ -4,7 +4,6 @@ import random
 RED = "\033[31m"
 GREEN = "\033[32m"
 BLUE = "\033[36m"
-YELLOW = "\033[33"
 BLACK = "\033[30m"
 BWHITE = "\033[47m"
 RESET = "\033[0m"  # Reset to default color
@@ -184,6 +183,7 @@ Turn = " "
 emotion = 0
 My_Top_HP = My_HP
 Ga_Top_HP = Ga_HP
+Ga_HP_diff  = 0
 MychoosedAttack = " "
 Myattackname = " "
 Gaattackname = " "
@@ -192,6 +192,8 @@ GachooseAttackdmg = " "
 Myattackdmg = 0
 Gaattackdmg = 0
 Objectselected = " "
+Object1 =" "
+Object1effect = " "
 Advance = " "
 Action = 0
 
@@ -223,14 +225,20 @@ while My_HP != 0 and Ga_HP != 0:
          print(f"| {GaryPokemon}    Lv {Ga_LvL}                                       |")
     else: 
          print(f"| {GaryPokemon}{Buspace}    Lv {Ga_LvL}                                       |")     
-    print(f"| Hp:{Ga_HP}                                                    |")
+    if Ga_HP < 10:
+         print(f"| ❤️‍🩹  {Ga_HP} Hp                                                |")
+    else:
+         print(f"| ❤️  {Ga_HP} Hp                                                 |")    
     if   MyPokemon == Sq:
          print(f"|                                       {MyPokemon}{Sqspace}    Lv {My_LvL} |")
     elif MyPokemon == Ch:    
          print(f"|                                       {MyPokemon}    Lv {My_LvL} |")
     else:
-         print(f"|                                       {MyPokemon}{Buspace}    Lv {My_LvL} |")     
-    print(f"|                                                    Hp:{My_HP} |")
+         print(f"|                                       {MyPokemon}{Buspace}    Lv {My_LvL} |")  
+    if My_HP < 10:
+         print(f"|                                               ❤️‍🩹  {My_HP} Hp  |") 
+    else:            
+       print(f"|                                                 ❤️  {My_HP} Hp |")
     print("|__________________________________________________________| ")
     print(f"|{emotion}               {RESET}| ")
     if   MyPokemon == Sq:
@@ -249,8 +257,8 @@ while My_HP != 0 and Ga_HP != 0:
           Action = int(input("Type your number option here: "))
           print(" ")
 
-          Random_Order = 0
-          Random_Order = random.randint(0,11)
+        # Random_Order = 0
+         # Random_Order = random.randint(0,11)
 
           Ga_Random_Attack = 0   #por DESCRIBIR Esto
           Ga_Random_Attack = random.randint(1,5)
@@ -259,18 +267,21 @@ while My_HP != 0 and Ga_HP != 0:
 
           if   Ga_Random_Attack == 1:
                Gaattackname = Ga_attack1_name
-               Gaattackdmg  = Ga_attack1_damage * 2
+               Gaattackdmg  = Ga_attack1_damage + 1
           elif Ga_Random_Attack  == 2:
                Gaattackname = Ga_attack2_name
                Gaattackdmg  = Ga_attack2_damage 
           elif Ga_Random_Attack  == 3:
                Gaattackname = Ga_attack3_name
-               Gaattackdmg  = Ga_attack3_damage * 2    
+               Gaattackdmg  = Ga_attack3_damage + 3    
           elif Ga_Random_Attack  == 4:
                Gaattackname = Ga_attack4_name
-               Gaattackdmg  = Ga_attack4_damage * 2
-          else:
-              print("")     
+               Gaattackdmg  = Ga_attack4_damage + 4
+          elif Ga_Random_Attack  == 5:
+               Gaattackname = "Potion"
+               Gaattackdmg  = 20 
+          
+          print(Ga_fail, Ga_Random_Attack)     
                                  
        
           if Action == 1:
@@ -307,58 +318,77 @@ while My_HP != 0 and Ga_HP != 0:
              print(" ")       
              fails = 0
              fails = random.randint(0,10)
-             
+             Turn = random.randint(1,2)  
+             print("Turno", Turn) 
             print("============================================================")
             
-            if Random_Order == 0 or Random_Order == 2 or Random_Order == 4 or Random_Order == 6 or Random_Order == 7 or Random_Order == 8 or Random_Order == 10:
-               Turn == 1
+           # if Random_Order == 0 or Random_Order == 2 or Random_Order == 4 or Random_Order == 6 or Random_Order == 7 or Random_Order == 8 or Random_Order == 10:
+            #   Turn == 1
                
-            else:
-               Turn == 2
-               
+            #else:
+             #  Turn == 2
 
-                 
+               
+            Turn = random.randint(1,2)  
+            print("Turno", Turn)     
               
             if Turn != 2:
+                 print("Turno", Turn)    
                               
                  if  fails == 1 or fails == 3 or fails == 7:
-                    print(f"{MyPokemon} used {Myattackname}: but it failed!😲") 
+                    print(f"{MyPokemon} used {BOLDWHITE}{Myattackname}{RESET}: but it failed!😲") 
                                                   
                  else:
-                  print(f"💥 {MyPokemon} used {Myattackname}: {GaryPokemon} took {BOLDRED}{Myattackdmg}{RESET} damage!")
+                  print(f"💥 {MyPokemon} used {BOLDWHITE}{Myattackname}{RESET}: {GaryPokemon} took {BOLDRED}{Myattackdmg}{RESET} damage!")
                   Ga_HP = Ga_HP - Myattackdmg      
                   if Ga_HP == Ga_HP <= 0:
                      Ga_HP = 0
                   print(f"🤕 {GaryPokemon} has {Ga_HP} HP left.")
           
                 
-                 if   Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7:
-                  print(f"{GaryPokemon} used {Gaattackname}: but it failed!😲")    
+                 if   Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5 and Gaattackname != "Potion" :
+                  print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 ")    
 
-                 else:
-                  print(f"💥 {GaryPokemon} used {Gaattackname}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
+                 elif Ga_fail >= 0  and  Ga_Random_Attack == 5:
+                  Ga_HP = Ga_HP + Gaattackdmg 
+                  if Ga_HP >= Ga_Top_HP:
+                     Ga_HP_diff  = Ga_HP - Ga_Top_HP
+                     Gaattackdmg = Gaattackdmg - Ga_HP_diff 
+                     print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")
+                     Ga_HP =  Ga_Top_HP  
+
+                 elif  Ga_fail == 2 or  Ga_fail == 4 or  Ga_fail == 6 or  Ga_fail == 8 or  Ga_fail == 9 or  Ga_fail == 10 and Ga_Random_Attack != 5:
+                  print(f"💥 {GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
                   My_HP = My_HP - Gaattackdmg      
                   if My_HP == My_HP <= 0:
                      My_HP = 0
                   print(f"🤕 {MyPokemon} has {My_HP} HP left.")  
 
             else: 
-                 if   Ga_fail == 1 or 3 or 7:
-                  print(f"{GaryPokemon} use {Gaattackname}: but fail!")    
+                 if  Gaattackname != "Potion" and  (Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5):
+                     print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 what", Ga_fail)   
+                
+                 elif Ga_fail >= 0  and  Ga_Random_Attack == 5:
+                  Ga_HP = Ga_HP + Gaattackdmg 
+                  if Ga_HP >= Ga_Top_HP:
+                     Ga_HP_diff  = Ga_HP - Ga_Top_HP
+                     Gaattackdmg = Gaattackdmg - Ga_HP_diff 
+                     print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")
+                     Ga_HP =  Ga_Top_HP      
 
-                 elif Ga_fail == 0 or Ga_fail == 2 or Ga_fail == 4 or Ga_fail == 5 or Ga_fail ==  6 or Ga_fail == 8 or Ga_fail == 9 or Ga_fail == 10:
-                  print(f"💥 {GaryPokemon} used {Gaattackname}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
+                 elif Ga_fail == 0 or Ga_fail == 2 or Ga_fail == 4  or Ga_fail ==  6 or Ga_fail == 8 or Ga_fail == 9 or Ga_fail == 10:
+                  print(f"💥 {GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
                   My_HP = My_HP - Gaattackdmg      
                   if My_HP == My_HP <= 0:
                      My_HP = 0
                   print(f"    {MyPokemon} has {My_HP} left")
 
                  if fails == 1 or fails == 3 or fails == 7:
-                  print(f"💥 {MyPokemon} use {Myattackname}: but fail!")    
+                  print(f"💥 {MyPokemon} use {BOLDWHITE}{Myattackname}{RESET}: but fail! 😲")    
                   
                   
                  elif fails == 0 or fails == 2 or fails == 4 or fails == 5 or fails == 6 or fails == 8 or fails == 9 or fails == 10:
-                  print(f"💥 {MyPokemon} used {Myattackname}: {GaryPokemon} took {BOLDRED}{Myattackdmg}{RESET} damage!")
+                  print(f"💥 {MyPokemon} used {BOLDWHITE}{Myattackname}{RESET}: {GaryPokemon} took {BOLDRED}{Myattackdmg}{RESET} damage!")
                   Ga_HP = Ga_HP - Myattackdmg      
                   if Ga_HP == Ga_HP <= 0:
                      Ga_HP = 0
