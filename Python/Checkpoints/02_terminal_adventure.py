@@ -170,18 +170,18 @@ print(" ")
 print(f"😎 Gary: Heh, so you've chosen a {MyPokemon}, huh? It doesn't matter what you choose, because I'm always one step ahead!")
 print("😎 Gary: There's a reason I'm the Professor's grandson. Get ready to see the difference between an amateur and a future Pokémon Champion!")
 input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
-print(" 😎You: I'm always ready, Gary! Let the best trainer win!")
+print(F"😁 {PlayerName}: I'm always ready, Gary! Let the best trainer win!")
 input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
 print(" ")
 
-print(" __________________________________________________________________ ")
+print(" _____________________________________________________________________ ")
 print(f"|{BWHITE}{BLACK}  🧓 Profesor Oak 🧓                                                {RESET}|")
 print(f"|{BWHITE}{BLACK}  Wait just a moment, you two! Before you begin, I'm giving each    {RESET}|")
 print(f"|{BWHITE}{BLACK}  of you some potions. Battles can be tough, and it's crucial to    {RESET}|")
 print(f"|{BWHITE}{BLACK}  look after the well-being of your Pokémon. Don't push them to     {RESET}|")
 print(f"|{BWHITE}{BLACK}  their limits without care. Remember, a good trainer always        {RESET}|")
 print(f"|{BWHITE}{BLACK}  prioritizes the health and happiness of their Pokémon!            {RESET}|")
-print(f"|{BWHITE}__________________________________________________________________{RESET}|")
+print(f"|{BWHITE}____________________________________________________________________{RESET}|")
 print(f"{ITALICS}You store the potions in your inventory. Each one has a label stating it will heal up to 20 HP for your Pokémon.{RESET}")
 
 input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
@@ -218,6 +218,7 @@ Action = 0
 
 
 while My_HP != 0 and Ga_HP != 0:
+    
     emotion = random.randint(1,5)
     if emotion == 1:
          emotion = ("Your Pokémon eagerly waits for you🐾 ❤️     ")
@@ -299,7 +300,7 @@ while My_HP != 0 and Ga_HP != 0:
                Gaattackname = "Potion"
                Gaattackdmg  = 20 
           
-          print(Ga_fail, Ga_Random_Attack)     
+         #Borrar al final print(Ga_fail, Ga_Random_Attack)     
                                  
        
           if Action == 1:
@@ -309,28 +310,30 @@ while My_HP != 0 and Ga_HP != 0:
              print("Type your attack or Type 0 to return to the main menu.")
              MychoosedAttack = int(input(f"{BOLDWHITE}→ 1{RESET} {My_attack1_name} {BOLDWHITE}→ 2{RESET} {My_attack2_name} {BOLDWHITE}→ 3{RESET} {My_attack3_name} {BOLDWHITE}→ 4{RESET} {My_attack4_name} "))
                  
-            
+             RandomDamage = 0
+             RandomDamage = random.randint(0,4)
+
              if MychoosedAttack == 0:
                     Action = 0
             
              elif  MychoosedAttack == 1:
                     Myattackname = My_attack1_name
-                    Myattackdmg = My_attack1_damage
+                    Myattackdmg = My_attack1_damage + RandomDamage - 2
                          
              elif  MychoosedAttack == 2:
                     Myattackname = My_attack2_name
-                    Myattackdmg =  My_attack2_damage
+                    Myattackdmg =  My_attack2_damage 
                      
              elif  MychoosedAttack == 3:
                     Myattackname = My_attack3_name
-                    Myattackdmg =  My_attack3_damage
+                    Myattackdmg =  My_attack3_damage + RandomDamage
                     
              elif  MychoosedAttack == 4:
                     Myattackname = My_attack4_name
-                    Myattackdmg =  My_attack4_damage
+                    Myattackdmg =  My_attack4_damage + RandomDamage
                     
              else:     
-                    print("else, continuamos al siguiente menu")
+                    print(" ")
               
             
              print(" ")       
@@ -340,10 +343,10 @@ while My_HP != 0 and Ga_HP != 0:
             print("============================================================")
                            
             Turn = random.randint(1,2)  
-            print("Turno", Turn)     
+          #  print("Turno", Turn)     bORRAR AL FINAL
               
             if Turn != 2:
-                 print("Turno", Turn)    
+                # print("Turno", Turn)    BORRAR AL FINAL
                               
                  if  fails == 1 or fails == 3 or fails == 7:
                     print(f"{MyPokemon} used {BOLDWHITE}{Myattackname}{RESET}: but it failed!😲") 
@@ -356,7 +359,7 @@ while My_HP != 0 and Ga_HP != 0:
                   print(f"🤕 {GaryPokemon} has {Ga_HP} HP left.")
           
                 
-                 if   Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5 and Gaattackname != "Potion" :
+                 if   Gaattackname != "Potion" and (Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5):
                   print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 ")    
 
                  elif Ga_fail >= 0  and  Ga_Random_Attack == 5:
@@ -391,10 +394,10 @@ while My_HP != 0 and Ga_HP != 0:
                   My_HP = My_HP - Gaattackdmg      
                   if My_HP == My_HP <= 0:
                      My_HP = 0
-                  print(f"    {MyPokemon} has {My_HP} left")
+                  print(f"🤕 {MyPokemon} has {My_HP} left")
 
                  if fails == 1 or fails == 3 or fails == 7:
-                  print(f"💥 {MyPokemon} use {BOLDWHITE}{Myattackname}{RESET}: but fail! 😲")    
+                  print(f"{MyPokemon} used {BOLDWHITE}{Myattackname}{RESET}: but it failed! 😲")    
                   
                   
                  elif fails == 0 or fails == 2 or fails == 4 or fails == 5 or fails == 6 or fails == 8 or fails == 9 or fails == 10:
@@ -402,18 +405,9 @@ while My_HP != 0 and Ga_HP != 0:
                   Ga_HP = Ga_HP - Myattackdmg      
                   if Ga_HP == Ga_HP <= 0:
                      Ga_HP = 0
-                  print(f"    {GaryPokemon} has {Ga_HP} left") 
+                  print(f"🤕 {GaryPokemon} has {Ga_HP} left") 
 
-               
-                
-              
-             
-            
-            
-            
-
-             
-             
+                       
             print("============================================================")
           elif Action == 2:
            
@@ -425,7 +419,7 @@ while My_HP != 0 and Ga_HP != 0:
           elif Action == 3:
              
              while  Objectselected !=1 and Objectselected !=0:
-              Objectselected = int(input(f"⚔️: {BOLDWHITE}→ 1{RESET} Potion  {BOLDWHITE} "))
+              Objectselected = int(input(f"⚔️: {BOLDWHITE}→ 1{RESET} Potion "))
               print("Type your object or Type 0 to return to the main menu.")
 
               if Objectselected == 0:
