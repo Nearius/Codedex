@@ -294,14 +294,15 @@ while My_HP != 0 and Ga_HP != 0:
             Gaattackname = Ga_attack4_name
             Gaattackdmg  = Ga_attack4_damage + 4
         elif Ga_Random_Attack  == 5:
-            if Ga_HP < 30:
+            if Ga_HP < 45:
                 print("Print")
                 Gaattackname = "Potion"
                 Gaattackdmg  = 20 
             else:
-                print(" control ", Ga_attack1_name )
+                print(" hay mas de 30 en vida se envia otro ataque ", Ga_attack1_name )
                 Gaattackname = Ga_attack1_name
                 Gaattackdmg  = Ga_attack1_damage + 2
+                Ga_Random_Attack = 1
 
         if Action == 1:
             
@@ -334,8 +335,7 @@ while My_HP != 0 and Ga_HP != 0:
             fails = random.randint(0,10)
             Turn = random.randint(1,2)             
 
-            if Turn == 1 and Action != 0:
-                        print("Turno 1")        
+            if Turn == 1 and Action != 0:                               
                         print("============================================================")  
                         if  fails == 1 or fails == 3 or fails == 7:
                             print(f"{MyPokemon} used {BOLDWHITE}{Myattackname}{RESET}: but it failed!😲") 
@@ -351,12 +351,14 @@ while My_HP != 0 and Ga_HP != 0:
                             print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 ")    
 
                         elif Ga_fail >= 0  and  Ga_Random_Attack == 5:
-                            Ga_HP = Ga_HP + Gaattackdmg 
-                            if Ga_HP >= Ga_Top_HP:
+                            print("Entramos en el area de cura del turno 1")
+                            Ga_HP = Ga_HP + Gaattackdmg
+                            if Ga_HP  >= Ga_Top_HP:
                                 Ga_HP_diff  = Ga_HP - Ga_Top_HP
-                                Gaattackdmg = Gaattackdmg - Ga_HP_diff 
-                                print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")
+                                Gaattackdmg = Gaattackdmg - Ga_HP_diff                                
                                 Ga_HP =  Ga_Top_HP  
+                            print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")
+                                
 
                         elif  Ga_fail == 2 or  Ga_fail == 4 or  Ga_fail == 6 or  Ga_fail == 8 or  Ga_fail == 9 or  Ga_fail == 10 and Ga_Random_Attack != 5:
                             print(f"💥 {GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
@@ -366,20 +368,18 @@ while My_HP != 0 and Ga_HP != 0:
                             print(f"🤕 {MyPokemon} has {My_HP} HP left.")                        
                             print("Action", Action)    
                         print("============================================================")
-            elif Turn == 2 and Action != 0: 
-                        print("Turno 2")
+            elif Turn == 2 and Action != 0:                        
                         print("============================================================")
                         if  Gaattackname != "Potion" and  (Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5):
                             print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 ")   
                 
                         elif Ga_fail >= 0  and  Ga_Random_Attack == 5:
-                            Ga_HP = Ga_HP + Gaattackdmg 
-                            if Ga_HP >= Ga_Top_HP:
+                            Ga_HP = Ga_HP + Gaattackdmg
+                            if Ga_HP  >= Ga_Top_HP:
                                 Ga_HP_diff  = Ga_HP - Ga_Top_HP
-                                Gaattackdmg = Gaattackdmg - Ga_HP_diff 
-                                print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")
-                            Ga_HP =  Ga_Top_HP      
-
+                                Gaattackdmg = Gaattackdmg - Ga_HP_diff                            
+                                Ga_HP =  Ga_Top_HP 
+                            print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")                                  
                         elif Ga_fail == 0 or Ga_fail == 2 or Ga_fail == 4  or Ga_fail ==  6 or Ga_fail == 8 or Ga_fail == 9 or Ga_fail == 10:
                             print(f"💥 {GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
                             My_HP = My_HP - Gaattackdmg      
@@ -402,63 +402,68 @@ while My_HP != 0 and Ga_HP != 0:
 
         elif Action == 2:
 
-              print("No tienes otros Pokemon")
-              print(" ")
-              Action = 0
+            print("No tienes otros Pokemon")
+            print(" ")
+            Action = 0
 
-              
+
         elif Action == 3:
-             
-             while  Objectselected !=1 and Objectselected !=0:
-              Objectselected = int(input(f"⚔️: {BOLDWHITE}→ 1{RESET} Potion "))
-              print("Type your object or Type 0 to return to the main menu.")
-              print(" ")
+
+            while  Objectselected !=1 and Objectselected !=0:
+                Objectselected = int(input(f"⚔️: {BOLDWHITE}→ 1{RESET} Potion "))
+                print("Type your object or Type 0 to return to the main menu.")
+                print(" ")
             
-              if Objectselected == 0:
-                   Action = 0
-              elif Objectselected == 1:
-                  
-                  My_HP = My_HP + 20
-                  
-                  if My_HP >= My_Top_HP:
-                     My_HP_diff  = My_HP - My_Top_HP
-                   
-                     My_HP = My_HP - 20
-                     My_HP = My_HP + (20 - My_HP_diff)
-                     
-                     Object1effect = 20 - My_HP_diff
-                     print("============================================================")
-                     
-                     
-                     print(f"💊 {BOLDWHITE}{PlayerName}{RESET} used {BOLDWHITE}Potion{RESET}! {MyPokemon} recovered {BOLDGREEN}{Object1effect}{RESET} ❤️   HP!")
-                     print(f"sumare a mi hp actual{My_HP} el diferencial{Object1effect}")
-                  else:
-                    print(f"💊 {BOLDWHITE}{PlayerName}{RESET} used {BOLDWHITE}Potion{RESET}! {MyPokemon} recovered {BOLDGREEN}20{RESET} ❤️   HP!")  
+                if Objectselected == 0 or Objectselected >= 2:
+                    Action = 0
+                    
+
+                elif Objectselected == 1 and Action == 3:
+
+                    My_HP = My_HP + 20
+
+                    if My_HP >= My_Top_HP:
+                        My_HP_diff  = My_HP - My_Top_HP
+                        My_HP = My_HP - 20
+                        My_HP = My_HP + (20 - My_HP_diff)
+                        Object1effect = 20 - My_HP_diff
+                        print("============================================================")
+                        print(f"💊 {BOLDWHITE}{PlayerName}{RESET} used {BOLDWHITE}Potion{RESET}! {MyPokemon} recovered {BOLDGREEN}{Object1effect}{RESET} ❤️   HP!")
+                    
+                    else:
+                        print("============================================================")
+                        print(f"💊 {BOLDWHITE}{PlayerName}{RESET} used {BOLDWHITE}Potion{RESET}! {MyPokemon} recovered {BOLDGREEN}20{RESET} ❤️   HP!")  
+                        
+
+                
+                if Action == 0:
+                    print("")
+                
+                elif  Objectselected >=2:
+                        print("")
+                elif  Gaattackname != "Potion"  and ( Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5):
+                        print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 ") 
+                        print("============================================================")  
+                
+                elif Ga_fail >= 0  and  Ga_Random_Attack == 5 and Action == 3:
+                    Ga_HP = Ga_HP + Gaattackdmg 
+                    if Ga_HP  >= Ga_Top_HP:
+                        Ga_HP_diff  = Ga_HP - Ga_Top_HP
+                        Gaattackdmg = Gaattackdmg - Ga_HP_diff 
+                        #print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")
+                        Ga_HP =  Ga_Top_HP  
+                    print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")       
+                    print("============================================================")
+                elif (Ga_fail == 0 or Ga_fail == 2 or Ga_fail == 4  or Ga_fail ==  6 or Ga_fail == 8 or Ga_fail == 9 or Ga_fail == 10) and Action == 3:
+                    print(f"💥 {GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
+                    My_HP = My_HP - Gaattackdmg      
+                    if My_HP == My_HP <= 0:
+                        My_HP = 0
+                    print(f"🤕 {MyPokemon} has {My_HP} left")
                     print("============================================================")
 
-               
-              if  Gaattackname != "Potion" and  (Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5):
-                     print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 ")   
-                
-              elif Ga_fail >= 0  and  Ga_Random_Attack == 5:
-                  Ga_HP = Ga_HP + Gaattackdmg 
-                  if Ga_HP >= Ga_Top_HP:
-                     Ga_HP_diff  = Ga_HP - Ga_Top_HP
-                     Gaattackdmg = Gaattackdmg - Ga_HP_diff 
-                     print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")
-                     Ga_HP =  Ga_Top_HP      
 
-              elif Ga_fail == 0 or Ga_fail == 2 or Ga_fail == 4  or Ga_fail ==  6 or Ga_fail == 8 or Ga_fail == 9 or Ga_fail == 10:
-                  print(f"💥 {GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: {MyPokemon} took {BOLDRED}{Gaattackdmg}{RESET} damage!")
-                  My_HP = My_HP - Gaattackdmg      
-                  if My_HP == My_HP <= 0:
-                     My_HP = 0
-                  print(f"🤕 {MyPokemon} has {My_HP} left")
-
-              
-
-                       
-              print("============================================================") 
+             
                
                  # if My_HP = My_Top_HP + 20 
                  #  Objectselected == "Potion"
