@@ -194,24 +194,24 @@ print(f"😁 {PlayerName}: Bring it on, Gary! I believe in my Pokémon, even if 
 print(f"😁 {PlayerName}: Come on, {MyPokemon}! {ITALICS}{PlayerName} have sent out {MyPokemon}")
 print(" ")
 input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
-#Combat variables that I need to procees the combat, and let's add some emotions for our Pokemon
 
-Action = 0
-Turn = " "
+
+#Combat variables that I need to procees the combat, and let's add some emotions for our Pokemon, Some variables will be reset at the final of the big loop.
+
+Action = 0             ; Turn = " "
 emotion = 0
-My_Top_HP = My_HP
-Ga_Top_HP = Ga_HP
-My_HP_diff  = 0 ; Ga_HP_diff  = 0 
-MychoosedAttack = " " ; Myattackname = " "
-Gaattackname = " "
-GachooseAttack = " "
-GachooseAttackdmg = " "
+
+My_Top_HP = My_HP      ; 
+My_HP_diff  = 0        ; Ga_HP_diff  = 0 
+MychoosedAttack = " "  ; Myattackname = " "
 Myattackdmg = 0
-Gaattackdmg = 0
-Objectselected = " "
-Object1effect = 20
-Advance = " "
-Action = 0
+
+Ga_Top_HP = Ga_HP
+Gaattackname = " "     ; GachooseAttack = " "
+GachooseAttackdmg = " ";Gaattackdmg = 0
+Objectselected = " "   ;Object1effect = 20
+
+
 
 
 
@@ -272,17 +272,15 @@ while My_HP != 0 and Ga_HP != 0:
         print(f"|{BWHITE}{BLACK}    {RESET}{BOLDWHITE}1{RESET} Fight ⚔️  | {BOLDWHITE}2{RESET} Pokemon 🦁 |  {BOLDWHITE}3{RESET} Bag 👜  | {BOLDWHITE}4{RESET} Run🏃💨{BWHITE}{BLACK}    {RESET}| ")
         print(f"|{BWHITE}{BLACK}__________________________________________________________{RESET}| ")
         print(" ")
-        Action = int(input("Type your number option here: "))
+        Action = int(input(f"{ITALICS}Type your number option here: {RESET}"))
         print(" ")
 
-        # Random_Order = 0
-        # Random_Order = random.randint(0,11)
-
+        
         Ga_Random_Attack = 0   #por DESCRIBIR Esto
         Ga_Random_Attack = random.randint(1,5)
         Ga_fail = 0
         Ga_fail = random.randint(1,10)
-
+        
         if   Ga_Random_Attack == 1:
             Gaattackname = Ga_attack1_name
             Gaattackdmg  = Ga_attack1_damage + 1
@@ -296,11 +294,14 @@ while My_HP != 0 and Ga_HP != 0:
             Gaattackname = Ga_attack4_name
             Gaattackdmg  = Ga_attack4_damage + 4
         elif Ga_Random_Attack  == 5:
-            Gaattackname = "Potion"
-            Gaattackdmg  = 20 
-
-#Borrar al final print(Ga_fail, Ga_Random_Attack)     
-
+            if Ga_HP < 30:
+                print("Print")
+                Gaattackname = "Potion"
+                Gaattackdmg  = 20 
+            else:
+                print(" control ", Ga_attack1_name )
+                Gaattackname = Ga_attack1_name
+                Gaattackdmg  = Ga_attack1_damage + 2
 
         if Action == 1:
             while MychoosedAttack != 1 and MychoosedAttack != 2 and MychoosedAttack != 3 and MychoosedAttack != 4 and MychoosedAttack != 0:
@@ -310,9 +311,7 @@ while My_HP != 0 and Ga_HP != 0:
                 MychoosedAttack = int(input(f"{BOLDWHITE}→ 1{RESET} {My_attack1_name} {BOLDWHITE}→ 2{RESET} {My_attack2_name} {BOLDWHITE}→ 3{RESET} {My_attack3_name} {BOLDWHITE}→ 4{RESET} {My_attack4_name} "))
                 RandomDamage = 0
                 RandomDamage = random.randint(0,4)
-                print(MychoosedAttack)    
-               
-          
+
                 if  MychoosedAttack == 1:
                             Myattackname = My_attack1_name
                             Myattackdmg = My_attack1_damage + RandomDamage - 2
@@ -326,22 +325,16 @@ while My_HP != 0 and Ga_HP != 0:
                 elif  MychoosedAttack == 4:
                             Myattackname = My_attack4_name
                             Myattackdmg =  My_attack4_damage + RandomDamage
-                    
-                else:     
-                        continue
-            else:     
-                    print(" ")            
-            
+                elif MychoosedAttack == 0:
+                    Action = 0
+
             print(" ")       
             fails = 0
             fails = random.randint(0,10)
             Turn = random.randint(1,2)             
-            print("============================================================")
-            Turn = random.randint(1,2)  
-            print("Turno", Turn)   
 
-            if Turn == 1:
-                        print("Turno", Turn)  
+            if Turn == 1 and Action != 0:
+                        print("============================================================")  
                         if  fails == 1 or fails == 3 or fails == 7:
                             print(f"{MyPokemon} used {BOLDWHITE}{Myattackname}{RESET}: but it failed!😲") 
 
@@ -368,9 +361,11 @@ while My_HP != 0 and Ga_HP != 0:
                             My_HP = My_HP - Gaattackdmg      
                             if My_HP == My_HP <= 0:
                                 My_HP = 0
-                            print(f"🤕 {MyPokemon} has {My_HP} HP left.")  
-
-            elif Turn == 2: 
+                            print(f"🤕 {MyPokemon} has {My_HP} HP left.")                        
+                            print("Action", Action)    
+                        print("============================================================")
+            elif Turn == 2 and Action != 0: 
+                        print("============================================================")
                         if  Gaattackname != "Potion" and  (Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5):
                             print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 ")   
                 
@@ -398,11 +393,10 @@ while My_HP != 0 and Ga_HP != 0:
                             if Ga_HP == Ga_HP <= 0:
                                 Ga_HP = 0
                             print(f"🤕 {GaryPokemon} has {Ga_HP} left") 
-
                         print("============================================================")
-                        print("Action", Action)  
-            else:
-                    Action = 0              
+                        
+                        
+                     
         elif Action == 2:
            
               print("No tienes otros Pokemon")
@@ -474,7 +468,7 @@ while My_HP != 0 and Ga_HP != 0:
         Objectselected = " "
         Turn = 0
         emotion = 0
-        Advance = " "
+        
 
 
           
