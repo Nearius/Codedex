@@ -355,8 +355,7 @@ while My_HP != 0 and Ga_HP != 0:
                         if   Gaattackname != "Potion" and (Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5):
                             print(f"{GaryPokemon} used {BOLDWHITE}{Gaattackname}{RESET}: but it failed!😲 ")    
 
-                        elif Ga_fail >= 0  and  Ga_Random_Attack == 5:
-                            print("Entramos en el area de cura del turno 1")
+                        elif Ga_fail >= 0  and  Ga_Random_Attack == 5:                            
                             Ga_HP = Ga_HP + Gaattackdmg
                             if Ga_HP  >= Ga_Top_HP:
                                 Ga_HP_diff  = Ga_HP - Ga_Top_HP
@@ -371,8 +370,9 @@ while My_HP != 0 and Ga_HP != 0:
                             if My_HP == My_HP <= 0:
                                 My_HP = 0
                             print(f"🤕 {MyPokemon} has {My_HP} HP left.")                        
-                            print("Action", Action)    
+
                         print("============================================================")
+
             elif Turn == 2 and Action != 0:                        
                         print("============================================================")
                         if  Gaattackname != "Potion" and  (Ga_fail == 1 or Ga_fail == 3 or Ga_fail == 7 or Ga_fail == 5):
@@ -402,7 +402,6 @@ while My_HP != 0 and Ga_HP != 0:
                                 Ga_HP = 0
                             print(f"🤕 {GaryPokemon} has {Ga_HP} left") 
                         print("============================================================")
-                        
                         
         #If you try to swicht to another Pokemon... good try my friend :')
         elif Action == 2:
