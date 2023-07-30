@@ -216,8 +216,12 @@ Objectselected = " "   ;Object1effect = 20
 
 
 
+#Here begins the large loop, and the goal of this project: To simulate a Pokémon battle in the style of the 
+#early Game Boy games from the years 199x - 2000."
+
 while My_HP != 0 and Ga_HP != 0:
     
+    #Every time the loop restarts, our Pokémon will show an emotion. I thought of this feature to give the battle a bit more personality.
     emotion = random.randint(1,5)
     if emotion == 1:
         emotion = ("Your Pokémon eagerly waits for you🐾 ❤️     ")
@@ -232,9 +236,8 @@ while My_HP != 0 and Ga_HP != 0:
     else:
         emotion == ("Your Pokémon feels scared. 😨👻            ")
 
-
-    #ident
-
+    #Below, we have the main combat panel, where the HP of each Pokémon is displayed, along with their level and name.
+    #It will also show the emotion of the Pokémon we described earlier, and we have a panel available with four options.
     print(" __________________________________________________________ ")
     print("|                                                          |")
     if   GaryPokemon == Sq:
@@ -266,7 +269,8 @@ while My_HP != 0 and Ga_HP != 0:
     else:      
         print(f"|What will {MyPokemon} do?                                  | ")
 
-    Action=0   
+    Action=0  
+    # We start the first inner loop, where we ensure that the player can only choose one of the 4 available options.
     while Action != 1 and Action != 2 and Action != 3 and Action != 4 and Myattackname != " 1"  and Objectselected != " 1":
         print(f"|{BWHITE}{BLACK}                                                          {RESET}| ")
         print(f"|{BWHITE}{BLACK}    {RESET}{BOLDWHITE}1{RESET} Fight ⚔️  | {BOLDWHITE}2{RESET} Pokemon 🦁 |  {BOLDWHITE}3{RESET} Bag 👜  | {BOLDWHITE}4{RESET} Run🏃💨{BWHITE}{BLACK}    {RESET}| ")
@@ -275,8 +279,9 @@ while My_HP != 0 and Ga_HP != 0:
         Action = int(input(f"{ITALICS}Type your number option here: {RESET}"))
         print(" ")
 
-        
-        Ga_Random_Attack = 0   #por DESCRIBIR Esto
+        #Now we determine which attack our opponent chooses and its probability of failure, using the random.randint tool.
+        #I've designed it so that the enemy always chooses a Pokémon with a stronger type than mine. Therefore, I add a bit more attack damage to each move
+        Ga_Random_Attack = 0 
         Ga_Random_Attack = random.randint(1,5)
         Ga_fail = 0
         Ga_fail = random.randint(1,10)
@@ -293,29 +298,29 @@ while My_HP != 0 and Ga_HP != 0:
         elif Ga_Random_Attack  == 4:
             Gaattackname = Ga_attack4_name
             Gaattackdmg  = Ga_attack4_damage + 4
-        elif Ga_Random_Attack  == 5:
+        elif Ga_Random_Attack  == 5:      #If this condition is met, the opponent will use a potion to heal their Pokémon. Depending on the current HP level of the opponent, I allow them to use a potion or an attack.
             if Ga_HP < 45:
                 Gaattackname = "Potion"
                 Gaattackdmg  = 20 
-            else:
-                print(" hay mas de 30 en vida se envia otro ataque ", Ga_attack1_name )
+            else:                
                 Gaattackname = Ga_attack1_name
                 Gaattackdmg  = Ga_attack1_damage + 2
                 Ga_Random_Attack = 1
 
         if Action == 1:
-            
+            #Loop to ensure a correct option is chosen; otherwise, an option to return to the main menu is offered.
             while MychoosedAttack != 1 and MychoosedAttack != 2 and MychoosedAttack != 3 and MychoosedAttack != 4 and MychoosedAttack != 0:
                 print(f"           {BOLDBLUE}        ⚔️  Fight   Menu ⚔️{RESET}")
                 print(" ")
-                print("Type your attack or Type 0 to return to the main menu.")
+                print(f"{ITALICS}Type your attack or Type{RESET} {BOLDWHITE}0{RESET}{ITALICS} to return to the main menu.{RESET}")
                 MychoosedAttack = int(input(f"{BOLDWHITE}→ 1{RESET} {My_attack1_name} {BOLDWHITE}→ 2{RESET} {My_attack2_name} {BOLDWHITE}→ 3{RESET} {My_attack3_name} {BOLDWHITE}→ 4{RESET} {My_attack4_name} "))
                 RandomDamage = 0
                 RandomDamage = random.randint(0,4)
 
+                #These are the moves of our player's Pokémon. I've added a random.randint to make each attack diferent in every turn, but without much variation.
                 if  MychoosedAttack == 1:
                             Myattackname = My_attack1_name
-                            Myattackdmg = My_attack1_damage + RandomDamage - 2
+                            Myattackdmg = My_attack1_damage + RandomDamage - 2 #The first move is supposedly weaker, so I've added a nerf of -2 to it.
                 elif  MychoosedAttack == 2:
                             Myattackname = My_attack2_name
                             Myattackdmg =  My_attack2_damage 
@@ -331,9 +336,10 @@ while My_HP != 0 and Ga_HP != 0:
 
             print(" ")       
             fails = 0
-            fails = random.randint(0,10)
-            Turn = random.randint(1,2)             
+            fails = random.randint(0,10)  #Of course or Pokemon Can Fail his attack too and Ill control it with this variable
+            Turn = random.randint(1,2)    # And also Who attack first will be controllet by this variable, no more boring battles alwais = .         
 
+            #If you choose fight...
             if Turn == 1 and Action != 0:                               
                         print("============================================================")  
                         if  fails == 1 or fails == 3 or fails == 7:
@@ -398,14 +404,14 @@ while My_HP != 0 and Ga_HP != 0:
                         print("============================================================")
                         
                         
-
+        #If you try to swicht to another Pokemon... good try my friend :')
         elif Action == 2:
 
-            print("No tienes otros Pokemon")
+            print("You don't have other Pokémon to switch out.")
             print(" ")
             Action = 0
 
-
+        #If you try to use an item, I've added a loop to ensure only available options are chosen. In this case, the player always uses the item before the opponent.
         elif Action == 3:
 
             while  Objectselected !=1 and Objectselected !=0:
@@ -432,8 +438,6 @@ while My_HP != 0 and Ga_HP != 0:
                     else:
                         print("============================================================")
                         print(f"💊 {BOLDWHITE}{PlayerName}{RESET} used {BOLDWHITE}Potion{RESET}! {MyPokemon} recovered {BOLDGREEN}20{RESET} ❤️   HP!")  
-                        
-
                 
                 if Action == 0:
                     print("")
@@ -449,7 +453,6 @@ while My_HP != 0 and Ga_HP != 0:
                     if Ga_HP  >= Ga_Top_HP:
                         Ga_HP_diff  = Ga_HP - Ga_Top_HP
                         Gaattackdmg = Gaattackdmg - Ga_HP_diff 
-                        #print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")
                         Ga_HP =  Ga_Top_HP  
                     print(f"💊 {BOLDWHITE}Gary{RESET} used {BOLDWHITE}{Gaattackname}{RESET}! {GaryPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!")       
                     print("============================================================")
@@ -461,11 +464,11 @@ while My_HP != 0 and Ga_HP != 0:
                     print(f"🤕 {MyPokemon} has {My_HP} left")
                     print("============================================================")
 
-
+        #If players trys to avoid the battler or leave it..
         elif Action == 4:
-            print("No puedes abandonar este combate")    
+            print("You cannot leave this battle.")    
             Action = 0   
-
+        # Need to reset some Variables
         MychoosedAttack = " "
         Myattackname = " "
         Myattackdmg = 0
@@ -477,7 +480,8 @@ while My_HP != 0 and Ga_HP != 0:
         
 
 print(" ")
-
+#Final part: once the large loop (which encompasses the entire battle) is completed and the health of one or both 
+#Pokémon ends, we move on to the final part of the code where we write a brief conclusion based on the outcome of the battle.
 if   My_HP == 0 and Ga_HP == 0:  
     print("============================================================")
     print(" ")
