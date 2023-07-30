@@ -295,7 +295,6 @@ while My_HP != 0 and Ga_HP != 0:
             Gaattackdmg  = Ga_attack4_damage + 4
         elif Ga_Random_Attack  == 5:
             if Ga_HP < 45:
-                print("Print")
                 Gaattackname = "Potion"
                 Gaattackdmg  = 20 
             else:
@@ -463,23 +462,10 @@ while My_HP != 0 and Ga_HP != 0:
                     print("============================================================")
 
 
-             
-               
-                 # if My_HP = My_Top_HP + 20 
-                 #  Objectselected == "Potion"
-                 #  if My_HP >= My_Top_HP:
-                  #    My_HP = My_Top_HP
-              
-            #  print(f"💊 {BOLDWHITE}{PlayerName}{RESET} used {BOLDWHITE}Potion{RESET}! {MyPokemon} recovered {BOLDGREEN}{Gaattackdmg}{RESET} ❤️   HP!") 
-
-             
-         
         elif Action == 4:
-               
-               print("No puedes abandonar este combate")    
-               Action = 0   
-     
-          
+            print("No puedes abandonar este combate")    
+            Action = 0   
+
         MychoosedAttack = " "
         Myattackname = " "
         Myattackdmg = 0
@@ -488,13 +474,76 @@ while My_HP != 0 and Ga_HP != 0:
         emotion = 0
         
 
+        
 
-          
-         # input(f" {Objectselected},{My_HP} , {My_Top_HP} ?:")
 print(" ")
-  #  print(f"{MyPokemon} use {Myattackname}")
-              
-print("fin bucle")
 
-    #print(f"{MyPokemon} use {Myattackname}: {GaryPokemon} lose {Myattackdmg}")
-  
+if   My_HP == 0 and Ga_HP == 0:  
+    print("============================================================")
+    print(" ")
+    print("Both Pokémon have been knocked out; the battle is declared a draw and cannot proceed further.")
+    print(" ") 
+    print("============================================================")         
+    print(" ___________________________________________________________________ ")
+    print(f"|{BWHITE}{BLACK}  🧓 Professor Oak 🧓                                              {RESET}|")
+    print(f"|{BWHITE}{BLACK}  Astonishing! Both Pokémon have fallen at the same time!          {RESET}|")
+    print(f"|{BWHITE}{BLACK}  In my years of studying Pokémon, rarely have I seen such a       {RESET}|")
+    print(f"|{BWHITE}{BLACK}  balanced match. It's a tie!                                      {RESET}|")
+    print(f"|{BWHITE}___________________________________________________________________{RESET}|")
+    input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
+
+    print(" ___________________________________________________________________ ")
+    print(f"|{BWHITE}{BLACK}  🧓 Professor Oak 🧓                                              {RESET}|")
+    print(f"|{BWHITE}{BLACK}  This just goes to show the potential both you and Gary possess.  {RESET}|")
+    print(f"|{BWHITE}{BLACK}  Your journey has only just begun, and already you're showcasing  {RESET}|")
+    print(f"|{BWHITE}{BLACK}  such prowess.                                                    {RESET}|")
+    print(f"|{BWHITE}{BLACK}                                                                   {RESET}|")
+    print(f"|{BWHITE}{BLACK}  Remember, the world of Pokémon is vast, filled with challenges   {RESET}|")
+    print(f"|{BWHITE}{BLACK}  and adventures. I look forward to seeing how you both grow as    {RESET}|")
+    print(f"|{BWHITE}{BLACK}  trainers. Till next time, and thank you for playing!             {RESET}|")
+    print(f"|{BWHITE}___________________________________________________________________{RESET}|")
+elif My_HP == 0 and Ga_HP != 0:
+    print("============================================================")
+    print(" ")
+    print(f"{MyPokemon} has been knocked out! Battle concluded: Gary claims victory. ")
+    print(" ") 
+    print("============================================================") 
+    print(" ____________________________________________________________________ ")
+    print(f"|{BWHITE}{BLACK}  🧓 Professor Oak 🧓                                               {RESET}|")
+    print(f"|{BWHITE}{BLACK}  It appears that your Pokémon has been defeated. Battles can be    {RESET}|")
+    print(f"|{BWHITE}{BLACK}  tough, and this is just one of the many challenges you'll face    {RESET}|")
+    print(f"|{BWHITE}{BLACK}  on your journey. Don't be disheartened; every trainer faces       {RESET}|")
+    print(f"|{BWHITE}{BLACK}  defeat at some point.                                             {RESET}|")
+    print(f"|{BWHITE}{BLACK}                                                                    {RESET}|")
+    print(f"|{BWHITE}{BLACK}  Use this experience to learn and grow. Remember, bond with your   {RESET}|")
+    print(f"|{BWHITE}{BLACK}  Pokémon, train harder, and approach your next battle with         {RESET}|")
+    print(f"|{BWHITE}{BLACK}  renewed determination. The path to becoming a Pokémon Master      {RESET}|")
+    print(f"|{BWHITE}{BLACK}  is filled with highs and lows. Stay resilient and never give up!  {RESET}|")
+    print(f"|{BWHITE}____________________________________________________________________{RESET}|")
+
+elif My_HP != 0 and Ga_HP == 0:
+    print("============================================================")
+    print(" ")
+    print(f"{GaryPokemon} has been defeated! Battle concluded: {PlayerName} emerges as the victor.   ")
+    print(" ") 
+    print("============================================================") 
+    print(" ____________________________________________________________________ ")
+    print(f"|{BWHITE}{BLACK}  🧓 Professor Oak 🧓                                               {RESET}|")
+    print(f"|{BWHITE}{BLACK}  Impressive work! Gary's Pokémon has been defeated. This shows     {RESET}|")
+    print(f"|{BWHITE}{BLACK}  your potential and the strong bond you've started building with   {RESET}|")
+    print(f"|{BWHITE}{BLACK}  your Pokémon. Keep up the good work!                              {RESET}|")
+    print(f"|{BWHITE}{BLACK}                                                                    {RESET}|")
+    print(f"|{BWHITE}{BLACK}  But remember, each battle is a learning experience for both       {RESET}|")
+    print(f"|{BWHITE}{BLACK}  the winner and the loser. I'm sure Gary will come back even       {RESET}|")
+    print(f"|{BWHITE}{BLACK}  stronger next time. Keep training and nurturing your Pokémon,     {RESET}|")
+    print(f"|{BWHITE}{BLACK}  as the journey to becoming a Pokémon Master is long and filled    {RESET}|")
+    print(f"|{BWHITE}{BLACK}  with many challenges. Great job today!                            {RESET}|")
+    print(f"|{BWHITE}____________________________________________________________________{RESET}|")
+
+    input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")
+    print(" ")
+    print("😎 Gary: You may have won this round, but this isn't the last you'll see of me. Train hard, because next time, I won't go easy on you!")
+    print(" ")
+
+input(f"{ITALICS}>> Press [ENTER] to continue <<{RESET}")   
+print("                                                                        ...To be continued")  
