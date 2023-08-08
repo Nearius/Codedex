@@ -138,7 +138,7 @@ while True:
     elif state == "intro2":
         intro2()
         frame2 = draw_button(Screen, "Next", 645, 295, 60, 35, BLACK)  
-        button_rect = draw_button(Screen, "Next", 650, 300, 50, 25, WHITE)   #PROBLEMA, AL PULSAR EL BOTON PREVIO, AQUI PASAMOS A LA 3 INTRO RAPIDO.
+        button_rect = draw_button(Screen, "Next", 650, 300, 50, 25, WHITE)   
         mouse_pos = pygame.mouse.get_pos()
         mouse_pressed = pygame.mouse.get_pressed()
         if button_rect.collidepoint(mouse_pos) and mouse_pressed[0]:
