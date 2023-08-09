@@ -1,9 +1,10 @@
 import pygame , sys
 from pygame.locals import *
 
-pygame.init()
 
-#Screen - VENTANA   pasamos de Screen a screen
+
+#==================== Main Screen ====================
+pygame.init()
 W, H = 750,450
 Screen = pygame.display.set_mode ((W , H))
 x = 0
@@ -12,15 +13,18 @@ Clock = pygame.time.Clock()
 pygame.display.set_caption('Nearius world 😁')
 icon = pygame.image.load('images/icon.png')
 pygame.display.set_icon(icon)
+fondo = pygame.image.load('images/fondo.png').convert()   #Fondo means Background in Spanish
 
-#Fondo
-fondo = pygame.image.load('images/fondo.png').convert()
+
+#====================SPRITES====================
 Oak = pygame.image.load('images/oak1.png')
 Pokeball = pygame.image.load('images/pokeball.png')
 CHPokeball = pygame.image.load('images/pokeball.png')
+SQPokeball = pygame.image.load('images/pokeball.png')
+BUPokeball = pygame.image.load('images/pokeball.png')
 
 
-#Paleta de colores
+#====================🌈COLORS🌈====================
 WHITE = (255,255,255)
 GREEN = (0,0,255)
 CYAN = (0,255,255)
@@ -30,7 +34,7 @@ RED = (255,0,0)
 PINK = (255,0,255)
 BLACK = (0,0,0)
 
-#TEXTS 
+#====================TEXTS====================
 
 fuente = pygame.font.Font(None, 26) # Puedes ajustar el tamaño
 textOak = fuente.render("Profesor Oak", True, BLUE)
@@ -44,37 +48,51 @@ text6 = " "# Color blanco
 text7 = fuente.render("Now it's time to choose your first Pokemon ", True, BLACK) 
 
 
-#IMAGENES EN MOVIMIENTO:
-## Pokebal
+#==============SPRITES MOVEMENTS============
 
+#0 Random Pokeball
 coord_pokeball_x = 750   
 coord_pokeball_y = 150
 
 speed_x = 1
 speed_y = 1 
 
-#---------------------------
-coord_chpokeball_x = 1200   
-coord_chpokeball_y = 1200
+#Charmander Pokeball
+coord_CHpokeball_x = 750   
+coord_CHpokeball_y = 150
 
-speed_chx = 1
-speed_chy = 1 
+speed_CH_x = 1
+speed_CH_y = 1 
+
+#Squirtle Pokeball
+coord_SQpokeball_x = 750   
+coord_SQpokeball_y = 150
+
+speed_SQ_x = 1
+speed_SQ_y = 1 
+
+#Bulbasaur Pokeball
+coord_BUpokeball_x = 750   
+coord_BUpokeball_y = 150
+
+speed_BU_x = 1
+speed_BU_y = 1 
 
 
-## Functions:
+# =========Functions=======================
 
 def texbox():
     Textframe = pygame.draw.rect(Screen, BLACK, (18,327,712,108)) # primer marco de texto negro
     pygame.draw.rect(Screen, WHITE, (24,332,700,98)) #segundo marco de texto blanco superpuesto
     Screen.blit(Pokeball, (coord_pokeball_x,coord_pokeball_y))
-    Screen.blit(CHPokeball, (coord_chpokeball_x,coord_chpokeball_y))
+
 
     
     
 def intro1():
     Screen.blit(Oak,(10,200))
     texbox()
-    Screen.blit(Pokeball, (coord_pokeball_x,coord_pokeball_y))
+    #Screen.blit(Pokeball, (coord_pokeball_x,coord_pokeball_y))
     Screen.blit(text, (30, 338)) # Coordenadas para ubicar el texto dentro de la caja
     Screen.blit(text2, (30, 360)) # Coordenadas para ubicar el texto dentro de la caja
     Screen.blit(text3, (30, 380)) # Coordenadas para ubicar el texto dentro de la caja
@@ -96,6 +114,9 @@ def intro3():
     Screen.blit(textOak,(30,338))
     Screen.blit(text6, (30, 360))
     Screen.blit(text7, (30, 380))
+    Screen.blit(CHPokeball, (coord_CHpokeball_x,coord_CHpokeball_y))
+    Screen.blit(SQPokeball, (coord_SQpokeball_x,coord_SQpokeball_y))
+    Screen.blit(BUPokeball, (coord_BUpokeball_x,coord_BUpokeball_y))
 
 def pokemonpresentation():
     texbox()
@@ -169,8 +190,12 @@ while True:
 
     elif state == "intro2":
         intro2()
-        coord_pokeball_x = 40
-        coord_pokeball_y = 50
+        if (coord_pokeball_x > 750 or coord_pokeball_x < 0):
+           speed_x *= -1
+        if (coord_pokeball_y > 300 or coord_pokeball_y <0):
+             speed_y *= -1
+        coord_pokeball_x += speed_x
+        coord_pokeball_y += speed_y
         frame2 = draw_button(Screen, "Next", 645, 295, 60, 35, BLACK)  
         button_rect = draw_button(Screen, "Next", 650, 300, 50, 25, WHITE)   
         mouse_pos = pygame.mouse.get_pos()
@@ -181,7 +206,24 @@ while True:
 
     elif state == "intro3":
         intro3()
+        Clock.tick(50)
+        coord_CHpokeball_x = 187
+        coord_CHpokeball_y = 137
+        if (coord_CHpokeball_x > 186 or coord_CHpokeball_x < 189):
+           speed_x *= -1
+        coord_CHpokeball_x += speed_x
+        coord_SQpokeball_x = 375
+        coord_SQpokeball_y = 137
+        if (coord_SQpokeball_x > 374 or coord_SQpokeball_x < 376):
+           speed_x *= -1
+        coord_SQpokeball_x += speed_x
+        coord_BUpokeball_x = 562
+        coord_BUpokeball_y = 137
+        if (coord_BUpokeball_x > 561 or coord_BUpokeball_x < 564):
+           speed_x *= -1
+        coord_BUpokeball_x += speed_x
 
+    Clock.tick(FPS)
 
 
     
