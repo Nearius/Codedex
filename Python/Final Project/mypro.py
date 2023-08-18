@@ -58,22 +58,21 @@ speed_x = 1
 speed_y = 1 
 
 #Charmander Pokeball
-coord_CHpokeball_x = 750   
-coord_CHpokeball_y = 150
+coord_CHpokeball_x = 138   
+coord_CHpokeball_y = 110
 
 speed_CH_x = 1
 speed_CH_y = 1 
 
 #Squirtle Pokeball
-coord_SQpokeball_x = 750   
-coord_SQpokeball_y = 150
-
+coord_SQpokeball_x = 138  
+coord_SQpokeball_y = 200
 speed_SQ_x = 1
 speed_SQ_y = 1 
 
 #Bulbasaur Pokeball
-coord_BUpokeball_x = 750   
-coord_BUpokeball_y = 150
+coord_BUpokeball_x = 138   
+coord_BUpokeball_y = 300
 
 speed_BU_x = 1
 speed_BU_y = 1 
@@ -85,14 +84,15 @@ def texbox():
     Textframe = pygame.draw.rect(Screen, BLACK, (18,327,712,108)) # primer marco de texto negro
     pygame.draw.rect(Screen, WHITE, (24,332,700,98)) #segundo marco de texto blanco superpuesto
     Screen.blit(Pokeball, (coord_pokeball_x,coord_pokeball_y))
-
+    Screen.blit(CHPokeball, (coord_CHpokeball_x,coord_CHpokeball_y))
+    Screen.blit(SQPokeball, (coord_SQpokeball_x,coord_SQpokeball_y))
+    Screen.blit(BUPokeball, (coord_BUpokeball_x,coord_BUpokeball_y))
 
     
     
 def intro1():
     Screen.blit(Oak,(10,200))
     texbox()
-    #Screen.blit(Pokeball, (coord_pokeball_x,coord_pokeball_y))
     Screen.blit(text, (30, 338)) # Coordenadas para ubicar el texto dentro de la caja
     Screen.blit(text2, (30, 360)) # Coordenadas para ubicar el texto dentro de la caja
     Screen.blit(text3, (30, 380)) # Coordenadas para ubicar el texto dentro de la caja
@@ -102,7 +102,6 @@ def intro2():
     Screen.blit(Oak,(10,200))
     texbox()
     Getusername = fuente.render(username, True, RED)  #Recogida datos jugador.    
-
     Screen.blit(textOak,(30,338))
     Screen.blit(text5, (30, 360))
     Screen.blit(Getusername, (30, 380)) # Coordenadas para ubicar el texto dentro de la caja
@@ -122,7 +121,68 @@ def pokemonpresentation():
     texbox()
     Leftframe = pygame.draw.rect(Screen, BLACK, (154,75,130,150)) # primer marco de texto negro
     pygame.draw.rect(Screen, WHITE, (25,15,85,85)) #segundo marco de texto blanco superpuesto
+
+def pokemove(): 
+    global coord_pokeball_x, coord_pokeball_y, speed_x, speed_y, coord_CHpokeball_x, coord_CHpokeball_y,speed_CH_x,speed_CH_y, coord_SQpokeball_x, coord_SQpokeball_y,speed_SQ_x,speed_SQ_y,coord_BUpokeball_x, coord_BUpokeball_y,speed_BU_x,speed_BU_y  #Keyword "global" para acceder y modificar variables globales.
+
+    if (coord_pokeball_x > 750 or coord_pokeball_x < 0):
+        speed_x *= -1
+    if (coord_pokeball_y > 300 or coord_pokeball_y <0):
+        speed_y *= -1
+
+    coord_pokeball_x += speed_x
+    coord_pokeball_y += speed_y
+
+#charmander
+    if (coord_CHpokeball_x > 750 or coord_CHpokeball_x < 0):
+        speed_CH_x *= -1
+    if (coord_CHpokeball_y > 300 or coord_CHpokeball_y <0):
+        speed_CH_y *= -1
+
+    coord_CHpokeball_x += speed_CH_x
+    coord_CHpokeball_y += speed_CH_y
+
+#Squirtle
+    if (coord_SQpokeball_x > 750 or coord_SQpokeball_x < 0):
+        speed_SQ_x *= -1
+    if (coord_SQpokeball_y > 300 or coord_SQpokeball_y <0):
+        speed_SQ_y *= -1
+
+    coord_SQpokeball_x += speed_SQ_x
+    coord_SQpokeball_y += speed_SQ_y
+
+#Burbasaur
+    if (coord_BUpokeball_x > 750 or coord_BUpokeball_x < 0):
+        speed_BU_x *= -1
+    if (coord_BUpokeball_y > 300 or coord_BUpokeball_y <0):
+        speed_BU_y *= -1
+
+    coord_BUpokeball_x += speed_BU_x
+    coord_BUpokeball_y += speed_BU_y
+
+
+
+def finalpokebal():
+    global coord_pokeball_y, coord_pokeball_x
+
+
+    if coord_pokeball_y > 137:
+        coord_pokeball_y = coord_pokeball_y - 1
+    elif coord_pokeball_y < 137:
+        coord_pokeball_y = coord_pokeball_y + 1       
+
+    if coord_pokeball_x > 187:
+        coord_pokeball_x = coord_pokeball_x - 3
+    elif coord_pokeball_x < 187:
+        coord_pokeball_x = coord_pokeball_x + 3
     
+
+
+   
+
+
+
+
 
 def draw_button(screen, text, x, y, w, h, color):
     # Dibuja un rectángulo que será nuestro botón
@@ -166,18 +226,11 @@ while True:
         Screen.blit(fondo, (x_relative, 0))
     x -= 1    
 
-    pokemonpresentation()
+    #pokemonpresentation()
 
-    if state == "intro1":   #control what we see on screen
+    if state == "intro1":   #states control what we see on screen
         intro1() 
-        if (coord_pokeball_x > 750 or coord_pokeball_x < 0):
-           speed_x *= -1
-        if (coord_pokeball_y > 300 or coord_pokeball_y <0):
-             speed_y *= -1
-
-        coord_pokeball_x += speed_x
-        coord_pokeball_y += speed_y
-
+        pokemove()
         
         frame1 = draw_button(Screen, "Next", 645, 295, 60, 35, BLACK)  
         button_rect = draw_button(Screen, "Next", 650, 300, 50, 25, WHITE)   #Botton  para cambiar de escena
@@ -190,12 +243,7 @@ while True:
 
     elif state == "intro2":
         intro2()
-        if (coord_pokeball_x > 750 or coord_pokeball_x < 0):
-           speed_x *= -1
-        if (coord_pokeball_y > 300 or coord_pokeball_y <0):
-             speed_y *= -1
-        coord_pokeball_x += speed_x
-        coord_pokeball_y += speed_y
+        pokemove()
         frame2 = draw_button(Screen, "Next", 645, 295, 60, 35, BLACK)  
         button_rect = draw_button(Screen, "Next", 650, 300, 50, 25, WHITE)   
         mouse_pos = pygame.mouse.get_pos()
@@ -206,6 +254,8 @@ while True:
 
     elif state == "intro3":
         intro3()
+        finalpokebal()
+
         Clock.tick(50)
         coord_CHpokeball_x = 187
         coord_CHpokeball_y = 137
