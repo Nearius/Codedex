@@ -58,24 +58,24 @@ speed_x = 1
 speed_y = 1 
 
 #Charmander Pokeball
-coord_CHpokeball_x = 138   
-coord_CHpokeball_y = 110
+coord_CHpokeball_x = 187  
+coord_CHpokeball_y = 137
 
-speed_CH_x = 1
-speed_CH_y = 1 
+speed_CH_x = -3
+speed_CH_y = 3
 
 #Squirtle Pokeball
-coord_SQpokeball_x = 138  
-coord_SQpokeball_y = 200
-speed_SQ_x = 1
-speed_SQ_y = 1 
+coord_SQpokeball_x = 375  
+coord_SQpokeball_y = 137
+speed_SQ_x = 3
+speed_SQ_y = -3 
 
 #Bulbasaur Pokeball
-coord_BUpokeball_x = 138   
-coord_BUpokeball_y = 300
+coord_BUpokeball_x = 562
+coord_BUpokeball_y = 137
 
-speed_BU_x = 1
-speed_BU_y = 1 
+speed_BU_x = 3
+speed_BU_y = 3 
 
 
 # =========Functions=======================
@@ -83,7 +83,6 @@ speed_BU_y = 1
 def texbox():
     Textframe = pygame.draw.rect(Screen, BLACK, (18,327,712,108)) # primer marco de texto negro
     pygame.draw.rect(Screen, WHITE, (24,332,700,98)) #segundo marco de texto blanco superpuesto
-    Screen.blit(Pokeball, (coord_pokeball_x,coord_pokeball_y))
     Screen.blit(CHPokeball, (coord_CHpokeball_x,coord_CHpokeball_y))
     Screen.blit(SQPokeball, (coord_SQpokeball_x,coord_SQpokeball_y))
     Screen.blit(BUPokeball, (coord_BUpokeball_x,coord_BUpokeball_y))
@@ -113,9 +112,7 @@ def intro3():
     Screen.blit(textOak,(30,338))
     Screen.blit(text6, (30, 360))
     Screen.blit(text7, (30, 380))
-    Screen.blit(CHPokeball, (coord_CHpokeball_x,coord_CHpokeball_y))
-    Screen.blit(SQPokeball, (coord_SQpokeball_x,coord_SQpokeball_y))
-    Screen.blit(BUPokeball, (coord_BUpokeball_x,coord_BUpokeball_y))
+
 
 def pokemonpresentation():
     texbox()
@@ -123,38 +120,31 @@ def pokemonpresentation():
     pygame.draw.rect(Screen, WHITE, (25,15,85,85)) #segundo marco de texto blanco superpuesto
 
 def pokemove(): 
-    global coord_pokeball_x, coord_pokeball_y, speed_x, speed_y, coord_CHpokeball_x, coord_CHpokeball_y,speed_CH_x,speed_CH_y, coord_SQpokeball_x, coord_SQpokeball_y,speed_SQ_x,speed_SQ_y,coord_BUpokeball_x, coord_BUpokeball_y,speed_BU_x,speed_BU_y  #Keyword "global" para acceder y modificar variables globales.
+    global  speed_x, speed_y, coord_CHpokeball_x, coord_CHpokeball_y,speed_CH_x,speed_CH_y, coord_SQpokeball_x, coord_SQpokeball_y,speed_SQ_x,speed_SQ_y,coord_BUpokeball_x, coord_BUpokeball_y,speed_BU_x,speed_BU_y  #Keyword "global" para acceder y modificar variables globales.
 
-    if (coord_pokeball_x > 750 or coord_pokeball_x < 0):
-        speed_x *= -1
-    if (coord_pokeball_y > 300 or coord_pokeball_y <0):
-        speed_y *= -1
-
-    coord_pokeball_x += speed_x
-    coord_pokeball_y += speed_y
 
 #charmander
-    if (coord_CHpokeball_x > 750 or coord_CHpokeball_x < 0):
+    if (coord_CHpokeball_x > 720 or coord_CHpokeball_x < 0):
         speed_CH_x *= -1
-    if (coord_CHpokeball_y > 300 or coord_CHpokeball_y <0):
+    if (coord_CHpokeball_y > 300 or coord_CHpokeball_y < 0):
         speed_CH_y *= -1
 
     coord_CHpokeball_x += speed_CH_x
     coord_CHpokeball_y += speed_CH_y
 
 #Squirtle
-    if (coord_SQpokeball_x > 750 or coord_SQpokeball_x < 0):
+    if (coord_SQpokeball_x > 720 or coord_SQpokeball_x < 0):
         speed_SQ_x *= -1
-    if (coord_SQpokeball_y > 300 or coord_SQpokeball_y <0):
+    if (coord_SQpokeball_y > 300 or coord_SQpokeball_y < 0):
         speed_SQ_y *= -1
 
     coord_SQpokeball_x += speed_SQ_x
     coord_SQpokeball_y += speed_SQ_y
 
 #Burbasaur
-    if (coord_BUpokeball_x > 750 or coord_BUpokeball_x < 0):
+    if (coord_BUpokeball_x > 720 or coord_BUpokeball_x < 0):
         speed_BU_x *= -1
-    if (coord_BUpokeball_y > 300 or coord_BUpokeball_y <0):
+    if (coord_BUpokeball_y > 300 or coord_BUpokeball_y < 0):
         speed_BU_y *= -1
 
     coord_BUpokeball_x += speed_BU_x
@@ -163,23 +153,45 @@ def pokemove():
 
 
 def finalpokebal():
-    global coord_pokeball_y, coord_pokeball_x
+    global coord_CHpokeball_y, coord_CHpokeball_x, coord_SQpokeball_y, coord_SQpokeball_x, coord_BUpokeball_y, coord_BUpokeball_x
 
+#Charmander
+    if coord_CHpokeball_y > 137:
+        coord_CHpokeball_y = coord_CHpokeball_y - 3
+    elif coord_CHpokeball_y < 137:
+        coord_CHpokeball_y = coord_CHpokeball_y + 3       
 
-    if coord_pokeball_y > 137:
-        coord_pokeball_y = coord_pokeball_y - 1
-    elif coord_pokeball_y < 137:
-        coord_pokeball_y = coord_pokeball_y + 1       
-
-    if coord_pokeball_x > 187:
-        coord_pokeball_x = coord_pokeball_x - 3
-    elif coord_pokeball_x < 187:
-        coord_pokeball_x = coord_pokeball_x + 3
+    if coord_CHpokeball_x > 187:
+        coord_CHpokeball_x = coord_CHpokeball_x - 4
+    elif coord_CHpokeball_x < 187:
+        coord_CHpokeball_x = coord_CHpokeball_x + 4
     
+#Squirtle
+    if coord_SQpokeball_y > 137:
+        coord_SQpokeball_y = coord_SQpokeball_y - 3
+    elif coord_SQpokeball_y < 137:
+        coord_SQpokeball_y = coord_SQpokeball_y + 3       
+
+    if coord_SQpokeball_x > 375:
+        coord_SQpokeball_x = coord_SQpokeball_x - 4
+    elif coord_CHpokeball_x < 375:
+        coord_SQpokeball_x = coord_SQpokeball_x + 4
+    
+#Bulbasaur
+    if coord_BUpokeball_y > 137:
+        coord_BUpokeball_y = coord_BUpokeball_y - 3
+    elif coord_BUpokeball_y < 137:
+        coord_BUpokeball_y = coord_BUpokeball_y + 3       
+
+    if coord_BUpokeball_x > 562:
+        coord_BUpokeball_x = coord_BUpokeball_x - 4
+    elif coord_CHpokeball_x < 562:
+        coord_BUpokeball_x = coord_BUpokeball_x + 4
+    
+    Clock.tick(50)
 
 
    
-
 
 
 
@@ -255,23 +267,14 @@ while True:
     elif state == "intro3":
         intro3()
         finalpokebal()
+        mouse_pos = pygame.mouse.get_pos()
+        mouse_pressed = pygame.mouse.get_pressed()
+        if button_rect.collidepoint(mouse_pos) and mouse_pressed[0]:
+            state = "intro3"
+            pygame.time.wait(500) 
 
-        Clock.tick(50)
-        coord_CHpokeball_x = 187
-        coord_CHpokeball_y = 137
-        if (coord_CHpokeball_x > 186 or coord_CHpokeball_x < 189):
-           speed_x *= -1
-        coord_CHpokeball_x += speed_x
-        coord_SQpokeball_x = 375
-        coord_SQpokeball_y = 137
-        if (coord_SQpokeball_x > 374 or coord_SQpokeball_x < 376):
-           speed_x *= -1
-        coord_SQpokeball_x += speed_x
-        coord_BUpokeball_x = 562
-        coord_BUpokeball_y = 137
-        if (coord_BUpokeball_x > 561 or coord_BUpokeball_x < 564):
-           speed_x *= -1
-        coord_BUpokeball_x += speed_x
+        
+
 
     Clock.tick(FPS)
 
