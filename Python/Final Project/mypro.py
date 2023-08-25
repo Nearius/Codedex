@@ -22,6 +22,9 @@ Pokeball = pygame.image.load('images/pokeball.png')
 CHPokeball = pygame.image.load('images/pokeball.png')
 SQPokeball = pygame.image.load('images/pokeball.png')
 BUPokeball = pygame.image.load('images/pokeball.png')
+Charmander = pygame.image.load('images/charmander1.png')
+Squirtle = pygame.image.load('images/squirtle.png')
+Bulbasaur = pygame.image.load('images/bulbasaur.png')
 
 
 #====================🌈COLORS🌈====================
@@ -191,8 +194,65 @@ def finalpokebal():
     Clock.tick(50)
 
 
-   
 
+def choosedpokeball():
+    global coord_CHpokeball_y, coord_CHpokeball_x, coord_SQpokeball_y, coord_SQpokeball_x, coord_BUpokeball_y, coord_BUpokeball_x, state, Charmander, Squirtle, Bulbasaur
+
+    selected_pokemon = state
+    target_x, target_y = 375, 137
+
+    def move_to_target(coord_x, coord_y, target_x, target_y, speed_x=4, speed_y=3):
+        if coord_y > target_y:
+            coord_y = max(coord_y - speed_y, target_y)
+        elif coord_y < target_y:
+            coord_y = min(coord_y + speed_y, target_y)
+
+        if coord_x > target_x:
+            coord_x = max(coord_x - speed_x, target_x)
+        elif coord_x < target_x:
+            coord_x = min(coord_x + speed_x, target_x)
+
+        return coord_x, coord_y
+    
+    def show_the_pokemon(pokemon):
+     
+        if pokemon == "selected_charmander":
+            Screen.blit(Charmander, (300,60))  
+            pass
+        elif pokemon == "selected_squirtle":
+            Screen.blit(Squirtle, (375,137))  
+            pass         
+        elif pokemon == "selected_bulbasaur":
+            Screen.blit(Bulbasaur, (375,137))
+            pass
+
+    # Movemos el pokemon seleccionado rápidamente hacia el centro
+    if selected_pokemon == "selected_charmander":
+        coord_CHpokeball_x, coord_CHpokeball_y = move_to_target(coord_CHpokeball_x, coord_CHpokeball_y, target_x, target_y)
+
+        if coord_CHpokeball_x == target_x and coord_CHpokeball_y == target_y:
+            show_the_pokemon(selected_pokemon)
+
+
+
+        coord_SQpokeball_x, coord_SQpokeball_y = move_to_target(coord_SQpokeball_x, coord_SQpokeball_y, -100, -100, speed_x=1, speed_y=1)
+        coord_BUpokeball_x, coord_BUpokeball_y = move_to_target(coord_BUpokeball_x, coord_BUpokeball_y, 850, -100, speed_x=1, speed_y=1)
+
+    elif selected_pokemon == "selected_squirtle":
+        coord_SQpokeball_x, coord_SQpokeball_y = move_to_target(coord_SQpokeball_x, coord_SQpokeball_y, target_x, target_y)
+        if coord_SQpokeball_x == target_x and coord_SQpokeball_y == target_y:
+            show_the_pokemon(selected_pokemon)
+
+        coord_CHpokeball_x, coord_CHpokeball_y = move_to_target(coord_CHpokeball_x, coord_CHpokeball_y, -100, -100, speed_x=1, speed_y=1)
+        coord_BUpokeball_x, coord_BUpokeball_y = move_to_target(coord_BUpokeball_x, coord_BUpokeball_y, 850, -100, speed_x=1, speed_y=1)
+
+    elif selected_pokemon == "selected_bulbasaur":
+        coord_BUpokeball_x, coord_BUpokeball_y = move_to_target(coord_BUpokeball_x, coord_BUpokeball_y, target_x, target_y)
+        if coord_BUpokeball_x == target_x and coord_BUpokeball_y == target_y:
+            show_the_pokemon(selected_pokemon)
+
+        coord_SQpokeball_x, coord_SQpokeball_y = move_to_target(coord_SQpokeball_x, coord_SQpokeball_y, -100, -100, speed_x=1, speed_y=1)
+        coord_CHpokeball_x, coord_CHpokeball_y = move_to_target(coord_CHpokeball_x, coord_CHpokeball_y, 850, -100, speed_x=1, speed_y=1)
 
 
 
@@ -242,8 +302,7 @@ while True:
 
     if state == "intro1":   #states control what we see on screen
         intro1() 
-        pokemove()
-        
+        pokemove() 
         frame1 = draw_button(Screen, "Next", 645, 295, 60, 35, BLACK)  
         button_rect = draw_button(Screen, "Next", 650, 300, 50, 25, WHITE)   #Botton  para cambiar de escena
         mouse_pos = pygame.mouse.get_pos()
@@ -267,11 +326,43 @@ while True:
     elif state == "intro3":
         intro3()
         finalpokebal()
+
+        charmander_rect = pygame.Rect(coord_CHpokeball_x, coord_CHpokeball_y, CHPokeball.get_width(), CHPokeball.get_height())
+        squirtle_rect = pygame.Rect(coord_SQpokeball_x, coord_SQpokeball_y, SQPokeball.get_width(), SQPokeball.get_height())
+        bulbasaur_rect = pygame.Rect(coord_BUpokeball_x, coord_BUpokeball_y, BUPokeball.get_width(), BUPokeball.get_height())
+
         mouse_pos = pygame.mouse.get_pos()
         mouse_pressed = pygame.mouse.get_pressed()
-        if button_rect.collidepoint(mouse_pos) and mouse_pressed[0]:
-            state = "intro3"
-            pygame.time.wait(500) 
+
+        if charmander_rect.collidepoint(mouse_pos) and mouse_pressed[0]:
+            state = "selected_charmander"
+            pygame.time.wait(500)
+
+        elif squirtle_rect.collidepoint(mouse_pos) and mouse_pressed[0]:
+            state = "selected_squirtle"
+            pygame.time.wait(500)
+
+        elif bulbasaur_rect.collidepoint(mouse_pos) and mouse_pressed[0]:
+            state = "selected_bulbasaur"
+            pygame.time.wait(500)
+    
+    elif state == "selected_charmander":
+            choosedpokeball()
+            texbox()
+            selected_text = fuente.render(f"Congratulations, {username}! You've chosen Charmander!", True, RED)
+            Screen.blit(selected_text, (30, 360))
+
+    elif state == "selected_squirtle":
+            choosedpokeball()
+            texbox()
+            selected_text = fuente.render(f"Congratulations, {username}! You've chosen Squirtle!", True, BLUE)
+            Screen.blit(selected_text, (30, 360))
+    
+    elif state == "selected_bulbasaur":
+            choosedpokeball()
+            texbox()
+            selected_text = fuente.render(f"Congratulations, {username}! You've chosen Bulbasaur!", True, GREEN)
+            Screen.blit(selected_text, (30, 360))
 
         
 
