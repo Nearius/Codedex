@@ -3,7 +3,7 @@ from pygame.locals import *
 
 
 
-#==================== Main Screen ====================
+#==================== Main Screen AND Global variables====================
 pygame.init()
 W, H = 750,450
 Screen = pygame.display.set_mode ((W , H))
@@ -14,6 +14,7 @@ pygame.display.set_caption('Nearius world 😁')
 icon = pygame.image.load('images/icon.png')
 pygame.display.set_icon(icon)
 fondo = pygame.image.load('images/fondo.png').convert()   #Fondo means Background in Spanish
+hide_pokeballs = False
 
 
 #====================SPRITES====================
@@ -28,6 +29,7 @@ Bulbasaur = pygame.image.load('images/bulbasaur.png')
 
 
 #====================🌈COLORS🌈====================
+
 WHITE = (255,255,255)
 GREEN = (0,0,255)
 CYAN = (0,255,255)
@@ -50,15 +52,7 @@ username = ""
 text6 = " "# Color blanco
 text7 = fuente.render("Now it's time to choose your first Pokemon ", True, BLACK) 
 
-
 #==============SPRITES MOVEMENTS============
-
-#0 Random Pokeball
-coord_pokeball_x = 750   
-coord_pokeball_y = 150
-
-speed_x = 1
-speed_y = 1 
 
 #Charmander Pokeball
 coord_CHpokeball_x = 187  
@@ -70,6 +64,7 @@ speed_CH_y = 3
 #Squirtle Pokeball
 coord_SQpokeball_x = 375  
 coord_SQpokeball_y = 137
+
 speed_SQ_x = 3
 speed_SQ_y = -3 
 
@@ -80,33 +75,34 @@ coord_BUpokeball_y = 137
 speed_BU_x = 3
 speed_BU_y = 3 
 
+#====================Functions====================
 
-# =========Functions=======================
-
+#This function places a text frame at the bottom of the screen and controls the appearance of the Poké Balls spinning randomly until one of them is selected.
 def texbox():
-    Textframe = pygame.draw.rect(Screen, BLACK, (18,327,712,108)) # primer marco de texto negro
-    pygame.draw.rect(Screen, WHITE, (24,332,700,98)) #segundo marco de texto blanco superpuesto
-    Screen.blit(CHPokeball, (coord_CHpokeball_x,coord_CHpokeball_y))
-    Screen.blit(SQPokeball, (coord_SQpokeball_x,coord_SQpokeball_y))
-    Screen.blit(BUPokeball, (coord_BUpokeball_x,coord_BUpokeball_y))
+    Textframe = pygame.draw.rect(Screen, BLACK, (18,327,712,108)) 
+    pygame.draw.rect(Screen, WHITE, (24,332,700,98)) 
 
+
+    if not hide_pokeballs:
+        Screen.blit(CHPokeball, (coord_CHpokeball_x,coord_CHpokeball_y))
+        Screen.blit(SQPokeball, (coord_SQpokeball_x,coord_SQpokeball_y))
+        Screen.blit(BUPokeball, (coord_BUpokeball_x,coord_BUpokeball_y))
     
-    
+# The functions intro1 / intro2 / intro3 will add text to the text box created in the texbox() function.    
 def intro1():
     Screen.blit(Oak,(10,200))
     texbox()
-    Screen.blit(text, (30, 338)) # Coordenadas para ubicar el texto dentro de la caja
-    Screen.blit(text2, (30, 360)) # Coordenadas para ubicar el texto dentro de la caja
-    Screen.blit(text3, (30, 380)) # Coordenadas para ubicar el texto dentro de la caja
-    Screen.blit(text4, (30, 400)) # Coordenadas para ubicar el texto dentro de la caja
-
+    Screen.blit(text, (30, 338)) 
+    Screen.blit(text2, (30, 360)) 
+    Screen.blit(text3, (30, 380)) 
+    Screen.blit(text4, (30, 400)) 
 def intro2():
     Screen.blit(Oak,(10,200))
     texbox()
-    Getusername = fuente.render(username, True, RED)  #Recogida datos jugador.    
+    Getusername = fuente.render(username, True, RED)  #Gets player name.  
     Screen.blit(textOak,(30,338))
     Screen.blit(text5, (30, 360))
-    Screen.blit(Getusername, (30, 380)) # Coordenadas para ubicar el texto dentro de la caja
+    Screen.blit(Getusername, (30, 380)) 
 
 def intro3():
     Screen.blit(Oak,(10,200))
@@ -116,12 +112,7 @@ def intro3():
     Screen.blit(text6, (30, 360))
     Screen.blit(text7, (30, 380))
 
-
-def pokemonpresentation():
-    texbox()
-    Leftframe = pygame.draw.rect(Screen, BLACK, (154,75,130,150)) # primer marco de texto negro
-    pygame.draw.rect(Screen, WHITE, (25,15,85,85)) #segundo marco de texto blanco superpuesto
-
+#This function will control the movement of the 3 pokeballs on the initial screen; I must import the variables with the Global keyword.
 def pokemove(): 
     global  speed_x, speed_y, coord_CHpokeball_x, coord_CHpokeball_y,speed_CH_x,speed_CH_y, coord_SQpokeball_x, coord_SQpokeball_y,speed_SQ_x,speed_SQ_y,coord_BUpokeball_x, coord_BUpokeball_y,speed_BU_x,speed_BU_y  #Keyword "global" para acceder y modificar variables globales.
 
@@ -154,7 +145,7 @@ def pokemove():
     coord_BUpokeball_y += speed_BU_y
 
 
-
+#Thanks to this function, once it reaches intro 3, the 3 pokeballs will move to the center of the screen and shake until one of them is chosen.
 def finalpokebal():
     global coord_CHpokeball_y, coord_CHpokeball_x, coord_SQpokeball_y, coord_SQpokeball_x, coord_BUpokeball_y, coord_BUpokeball_x
 
@@ -195,8 +186,9 @@ def finalpokebal():
 
 
 
+#This has been the most complicated of all the functions for me. Once a pokeball is chosen, it will move to the center of the screen to display an image of the selected Pokémon, while the remaining pokeballs will move off the screen.
 def choosedpokeball():
-    global coord_CHpokeball_y, coord_CHpokeball_x, coord_SQpokeball_y, coord_SQpokeball_x, coord_BUpokeball_y, coord_BUpokeball_x, state, Charmander, Squirtle, Bulbasaur
+    global coord_CHpokeball_y, coord_CHpokeball_x, coord_SQpokeball_y, coord_SQpokeball_x, coord_BUpokeball_y, coord_BUpokeball_x, state, Charmander, Squirtle, Bulbasaur, hide_pokeballs
 
     selected_pokemon = state
     target_x, target_y = 375, 137
@@ -214,45 +206,46 @@ def choosedpokeball():
 
         return coord_x, coord_y
     
-    def show_the_pokemon(pokemon):
-     
-        if pokemon == "selected_charmander":
-            Screen.blit(Charmander, (300,60))  
-            pass
-        elif pokemon == "selected_squirtle":
-            Screen.blit(Squirtle, (375,137))  
-            pass         
-        elif pokemon == "selected_bulbasaur":
-            Screen.blit(Bulbasaur, (375,137))
-            pass
 
-    # Movemos el pokemon seleccionado rápidamente hacia el centro
+#show the pokemon selected
+    def show_the_pokemon(pokemon):
+        global coord_CHpokeball_y
+        if pokemon == "selected_charmander":
+            Screen.blit(Charmander, (300,60))             
+        elif pokemon == "selected_squirtle":
+            Screen.blit(Squirtle, (300,60))         
+        elif pokemon == "selected_bulbasaur":
+            Screen.blit(Bulbasaur, (300,60))
+
+
+    # We quickly move the selected Pokeball toward the center.
     if selected_pokemon == "selected_charmander":
         coord_CHpokeball_x, coord_CHpokeball_y = move_to_target(coord_CHpokeball_x, coord_CHpokeball_y, target_x, target_y)
 
         if coord_CHpokeball_x == target_x and coord_CHpokeball_y == target_y:
             show_the_pokemon(selected_pokemon)
+            hide_pokeballs = True
 
-
-
-        coord_SQpokeball_x, coord_SQpokeball_y = move_to_target(coord_SQpokeball_x, coord_SQpokeball_y, -100, -100, speed_x=1, speed_y=1)
-        coord_BUpokeball_x, coord_BUpokeball_y = move_to_target(coord_BUpokeball_x, coord_BUpokeball_y, 850, -100, speed_x=1, speed_y=1)
+        coord_SQpokeball_x, coord_SQpokeball_y = move_to_target(coord_SQpokeball_x, coord_SQpokeball_y, -100, -100, speed_x=6, speed_y=6)
+        coord_BUpokeball_x, coord_BUpokeball_y = move_to_target(coord_BUpokeball_x, coord_BUpokeball_y, 850, -100, speed_x=6, speed_y=6)
 
     elif selected_pokemon == "selected_squirtle":
         coord_SQpokeball_x, coord_SQpokeball_y = move_to_target(coord_SQpokeball_x, coord_SQpokeball_y, target_x, target_y)
         if coord_SQpokeball_x == target_x and coord_SQpokeball_y == target_y:
             show_the_pokemon(selected_pokemon)
+            hide_pokeballs = True
 
-        coord_CHpokeball_x, coord_CHpokeball_y = move_to_target(coord_CHpokeball_x, coord_CHpokeball_y, -100, -100, speed_x=1, speed_y=1)
-        coord_BUpokeball_x, coord_BUpokeball_y = move_to_target(coord_BUpokeball_x, coord_BUpokeball_y, 850, -100, speed_x=1, speed_y=1)
+        coord_CHpokeball_x, coord_CHpokeball_y = move_to_target(coord_CHpokeball_x, coord_CHpokeball_y, -100, -100, speed_x=6, speed_y=6)
+        coord_BUpokeball_x, coord_BUpokeball_y = move_to_target(coord_BUpokeball_x, coord_BUpokeball_y, 850, -100, speed_x=6, speed_y=6)
 
     elif selected_pokemon == "selected_bulbasaur":
         coord_BUpokeball_x, coord_BUpokeball_y = move_to_target(coord_BUpokeball_x, coord_BUpokeball_y, target_x, target_y)
         if coord_BUpokeball_x == target_x and coord_BUpokeball_y == target_y:
             show_the_pokemon(selected_pokemon)
+            hide_pokeballs = True
 
-        coord_SQpokeball_x, coord_SQpokeball_y = move_to_target(coord_SQpokeball_x, coord_SQpokeball_y, -100, -100, speed_x=1, speed_y=1)
-        coord_CHpokeball_x, coord_CHpokeball_y = move_to_target(coord_CHpokeball_x, coord_CHpokeball_y, 850, -100, speed_x=1, speed_y=1)
+        coord_SQpokeball_x, coord_SQpokeball_y = move_to_target(coord_SQpokeball_x, coord_SQpokeball_y, -100, -100, speed_x=6, speed_y=6)
+        coord_CHpokeball_x, coord_CHpokeball_y = move_to_target(coord_CHpokeball_x, coord_CHpokeball_y, 850, -100, speed_x=6, speed_y=6)
 
 
 
@@ -298,7 +291,6 @@ while True:
         Screen.blit(fondo, (x_relative, 0))
     x -= 1    
 
-    #pokemonpresentation()
 
     if state == "intro1":   #states control what we see on screen
         intro1() 
@@ -351,6 +343,7 @@ while True:
             texbox()
             selected_text = fuente.render(f"Congratulations, {username}! You've chosen Charmander!", True, RED)
             Screen.blit(selected_text, (30, 360))
+
 
     elif state == "selected_squirtle":
             choosedpokeball()
